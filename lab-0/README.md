@@ -73,7 +73,9 @@ Expected output:
 [ec2-user@ip-172-31-31-136:20:20:49:~]$ 
 ```
 
-### Environment variables and looking at content of files
+❗ Please note that the change to the PS1 variable which we did above is not permanent, the next time we connect, the change will not be there.
+
+### Environment variables, looking at content of files and manual pages
 Environment variables are variables which are set in a user's shell session. In the BASH shell, which you are using, they are normally set in one out of three files.
 
 ```
@@ -115,21 +117,68 @@ or
 ~/.bashrc
 ```
 
-## list and change directory
+### list and change directory
 The two most common tool used in any Linux distribution are ```ls``` and ```cd```. They help you navigate around in the operating system.
-Let's try it out.
+Let's try it out to further explore the files which sets environment variables. First we need to find out where we are on the Linux filesystem.
 
-💥 In your terminal, run the ```list directory``` command:
+💥 Use ```pwd``` to Print Working Directory, meaning printing out where you are currently.
+
+Run below commands:
+```
+pwd
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136:20:40:34:~]$ pwd
+/home/ec2-user
+[ec2-user@ip-172-31-31-136:20:55:42:~]$ 
+```
+
+💥 Let's see if we can find ~/.bashrc, a file located in our home directory. In your terminal, run the ```list directory``` command:
 
 ```
 ls
 ```
+
+Above lists all files located where we are currently.
 
 Expected example output:
 ```
 [ec2-user@ip-172-31-31-136 ~]$ ls
 [ec2-user@ip-172-31-31-136 ~]$
 ```
+
+That was perhaps not what we expected. We got nothing. The reason for this is because files which starts with ```.``` in their names, such as .bashrc are automatically hidden. To show hidden files we need to provide an argument to the ```ls``` command. But what argument?
+Introducing ```manual pages``` or ```man pages```. In Linux, most commands comes with a so called manual pages. 
+
+💥 Access the manual pages for the ls command.
+
+Run below commands:
+```
+man ls
+```
+
+Expected example output:
+```
+LS(1)                                                                                                         User Commands                                                                                                        LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -a, --all
+              do not ignore entries starting with .
+```
+
+Now we know how to find hidden files.
 
 
 
