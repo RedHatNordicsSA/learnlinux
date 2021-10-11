@@ -90,7 +90,6 @@ To have a look at these files, we can use the ```cat```or concatenate command, w
 💥 Run below command to display the content of the file ```/etc/bashrc``` and /home/user/.bashrc. 
 ```
 cat /etc/bashrc
-cat ~/.bashrc
 ```
 👍 Please note that instead of writing /home/user/.bashrc we are typing ~/.bashrc instead. ```~``` is shorthand for home directory and allows us to not hardcode the name of the user in this example.
 
@@ -117,8 +116,8 @@ or
 ~/.bashrc
 ```
 
-### list and change directory
-The two most common tool used in any Linux distribution are ```ls``` and ```cd```. They help you navigate around in the operating system.
+### listing files and permissions
+The most common command used in Linux is ```ls```. It helps you show files.
 Let's try it out to further explore the files which sets environment variables. First we need to find out where we are on the Linux filesystem.
 
 💥 Use ```pwd``` to Print Working Directory, meaning printing out where you are currently.
@@ -152,7 +151,7 @@ Expected example output:
 That was perhaps not what we expected. We got nothing. The reason for this is because files which starts with ```.``` in their names, such as .bashrc are automatically hidden. To show hidden files we need to provide an argument to the ```ls``` command. But what argument?
 Introducing ```manual pages``` or ```man pages```. In Linux, most commands comes with a so called manual pages. 
 
-💥 Access the manual pages for the ls command.
+💥 Access the manual pages for the ls command. To exit the manual page, press q.
 
 Run below commands:
 ```
@@ -178,7 +177,82 @@ DESCRIPTION
               do not ignore entries starting with .
 ```
 
+❗ To exit the manual page, press q.
+
 Now we know how to find hidden files.
 
+💥 Look at all the hidden files in your home directory.
+
+Run below commands:
+```
+ls -a
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136:21:05:51:~]$ ls -a
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  .ssh
+[ec2-user@ip-172-31-31-136:21:05:54:~]$ 
+```
+
+💥 We have found the .bashrc file. Let's see what more we can learn. Add the ```-l``` switch to the ls command. 
+```
+ls -la
+```
+
+Example output:
+```
+[ec2-user@ip-172-31-31-136:21:11:12:~]$ ls -la
+total 16
+drwx------. 3 ec2-user ec2-user  95 Oct 11 18:32 .
+drwxr-xr-x. 3 root     root      22 Oct 11 07:46 ..
+-rw-------. 1 ec2-user ec2-user  15 Oct 11 18:32 .bash_history
+-rw-r--r--. 1 ec2-user ec2-user  18 Apr 21 14:04 .bash_logout
+-rw-r--r--. 1 ec2-user ec2-user 141 Apr 21 14:04 .bash_profile
+-rw-r--r--. 1 ec2-user ec2-user 376 Apr 21 14:04 .bashrc
+drwx------. 2 ec2-user ec2-user  29 Oct 11 07:46 .ssh
+[ec2-user@ip-172-31-31-136:21:15:08:~]$ 
+```
+
+Let's take some time to break down what we are looking at here. First off, we can can see what user and what group owns what file.
+```
+-rw-r--r--. 1 ec2-user ec2-user 376 Apr 21 14:04 .bashrc
+```
+
+Next we can also see some other things, for example, at what date the file was created and to the far left, what permissions are set for this file.
+Permissions are displayed as follows:
+* The very first position indicates special permissions, such as if what we are looking at is a directory, a link or has special access to the system.
+* The first three positions, in our example starting at the first r, indicates permissions for the user who owns the file.
+* The second three positions, in our example starting with r, indicates permissions for the group which owns the file
+* The third three positions, in our example starting with r, indicates permissions for others, meaning everyone who does _not_ own the file.
+* 
+Permissions which can be set are r and as read, w as in write and x as in execute. If you see -, that means a permission is not set.
+So, in our example:
+```
+-rw-r--r--. 1 ec2-user ec2-user 376 Apr 21 14:04 .bashrc
+```
+Means that the user which owns this file, ec2-user, can read and write to this file.
+Means that the group which owns this file, also called ec2-user, can read this file.
+Means that everyone who does not own this file, can read this file.
+
+💥 Let's look at something else, at our home directory.
+
+Run below commands:
+```
+ls -la /home
+```
+
+Example output:
+```
+[ec2-user@ip-172-31-31-136:21:15:08:~]$ ls -la /home
+total 0
+drwxr-xr-x.  3 root     root      22 Oct 11 07:46 .
+dr-xr-xr-x. 18 root     root     236 May  4 17:30 ..
+drwx------.  3 ec2-user ec2-user  95 Oct 11 18:32 ec2-user
+```
+
+Here we can see the first position being set to ```d```, that means we are looking at a directory called ec2-user.
+The first three positions are set to ```rwx```, which means that the user who owns this directory has read, write and execute rights to the directory.
+In order to enter into a directory, you need both read and execute rights.
 
 
