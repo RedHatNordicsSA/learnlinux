@@ -798,7 +798,12 @@ less /etc/yum.repos.d/redhat-rhui-ha.repo
 
 In the file, you can see multiple repositories configured for the system. When we now will install software, yum searches through the available repositories until it finds (or not finds) the software we want to install.
 
-💥 Install tree, a pieces of software which allows us to display directory structures more easily.
+💥 Search the available repositories for a software called tree
+```
+sudo dnf search tree
+```
+
+💥 Install tree, a piece of software which allows us to display directory structures more easily.
 ```
 sudo dnf install tree
 ```
