@@ -1,8 +1,8 @@
-# Navigating in Linux
+# Command line fundamentals
 
-In this lab, you'll learn the basics about how to navigate in Linux and to use basic commands to manipulate your environment.
+In this lab, you'll learn the basics about the command line interface.
 
-## Linux and command line interface fundamentals
+### The terminal
 
 When you have connected to your system, you will see a prompt which looks something like this:
 ```
@@ -442,7 +442,7 @@ Expected output:
 
 ### Priviledged tasks
 Next, we're going to add a new user and group. Tasks like this requires admin priviledges.
-The default admin user in Linux is called _root_ and has user ID 0, to perform priviledged tasks, we will need to either become a priviledged user or to use a tool such as ```sudo```.
+The default admin user in Linux is called _root_ and has user ID 0, to perform priviledged tasks, we will need to either become a priviledged user or to use a tool such as ```sudo```, which allows us access to doing priviledged tasks.
 
 💥 Add a new user called _test_.
 ```
@@ -454,6 +454,8 @@ Expected output:
 [ec2-user@ip-172-31-31-136 ~]$ sudo useradd test
 [ec2-user@ip-172-31-31-136 ~]$
 ```
+
+Note that command which adds the user is called ```useradd```, we are just prefixing it with sudo to be given access to run the command.
 
 💥 Set the password for the user test, to something you remember.
 ```
@@ -504,7 +506,50 @@ Answer, permissions only allows the user and the group who owns the file to read
 sudo cat /etc/sudoers
 ```
 
+Expected output:
+```
+...
+## The COMMANDS section may have other options added to it.
+##
+## Allow root to run any commands anywhere 
+root	ALL=(ALL) 	ALL
 
+## Allows members of the 'sys' group to run networking, software, 
+## service management apps and more.
+# %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS
+
+## Allows people in group wheel to run all commands
+%wheel	ALL=(ALL)	ALL
+
+## Same thing without a password
+# %wheel	ALL=(ALL)	NOPASSWD: ALL
+
+## Allows members of the users group to mount and unmount the 
+## cdrom as root
+# %users  ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom
+
+## Allows members of the users group to shutdown this system
+# %users  localhost=/sbin/shutdown -h now
+
+## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)
+#includedir /etc/sudoers.d
+ec2-user	ALL=(ALL)	NOPASSWD: ALL
+```
+
+In this file we can see which users are allowed to do what with sudo.
+Good to keep in mind is that when sudo is used, actions are logged. If we have a look at system logs, we can see when we accessed the sudoers file.
+
+💥 Review last five lines of system logs using the journalctl command.
+```
+journalctl -n 5
+```
+
+Expected output should include:
+```
+[ec2-user@ip-172-31-31-136 ~]$ journalctl -n 5
+-- Logs begin at Mon 2021-10-11 07:45:09 UTC, end at Wed 2021-10-13 12:48:12 UTC. --
+Oct 13 12:48:12 ip-172-31-31-136.eu-central-1.compute.internal sudo[106040]: ec2-user : TTY=pts/1 ; PWD=/home/ec2-user ; USER=root ; COMMAND=/bin/cat /etc/sudoers
+```
 
 💥 Now that we have created a new local user, become the test user, using ```su```, see where you are and then list all files in the users home directory.
 ```
@@ -529,7 +574,70 @@ drwxr-xr-x. 4 root root  34 Oct 13 12:00 ..
 -rw-r--r--. 1 test test 376 Apr 21 14:04 .bashrc
 ```
 
-When we created the user, a home directory (/home/test) was also created for that user. If we look at the files that has been created they have permissions which 
+Note that when we created the user, a home directory (/home/test) was also created for that user.
 
+💥 Exit the session for the test user by running exit
+```
+exit
+```
+
+Expected output:
+```
+[test@ip-172-31-31-136 ~]$ exit
+logout
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+### Editing files
+Next thing which we need to know to be able to navigate the Linux operating system is how to edit files.
+The most common text editor in Linux is called ```vi```, which we'll have a quick look at.
+
+💥 Create a new file and start editing it using ```vi```
+```
+vi testfile
+```
+
+Expected output:
+```
+                                                             
+~
+~
+~
+~
+"testfile" [New File]
+```
+
+💥 To start inserting text, press ```i``` which stands for insert. To remove text, use backspace.
+```
+i
+```
+
+Expected output:
+```
+Some text you have input
+~
+~
+~
+~
+--- INSERT ---
+```
+
+💥 Now it's time file and close the text editor by pressing ``ESC``` and then ```:wq``` and then ```ENTER```
+```
+ESC
+:wq
+```
+
+After you press ESC and type in :wq, it should appear in the bottom on the screen, before you press enter. As such:
+```
+Some text some text
+~
+~
+~
+~
+:wq
+```
+
+Now you know enough to start exploring Linux, congratulations! 😃
 
 
