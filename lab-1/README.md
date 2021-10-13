@@ -206,6 +206,46 @@ dmesg
 Most program generates logs. In Red Hat Enterprise Linux, systemd is responsible to store them.
 We can access the logs by using the ```journalctl``` command.
 
+💥 Review the full system logs. Quit by pressing ```q```
+```
+journalctl
+```
+
+💥 Review logs for the boot process
+```
+journalctl -b
+```
+
+💥 Review logs for a specific service
+```
+journalctl -u tuned
+```
+
+💥 Follow the log stream live
+```
+journalctl -f
+```
+
+💥 Fetch logs since a specific time range
+```
+journalctl --since "1 hour ago"
+```
+
+💥 Fetch all logs for your user, using the $UID environment variable which containers the user id of our user.
+```
+journalctl _UID=$UID
+```
+
+Logs can also be found stored in files in /var/log.
+💥 List logs files
+```
+ls /var/log
+```
+
+💥 Search general log file for error messages
+```
+sudo grep -i error /var/log/messages
+```
 
 
 
