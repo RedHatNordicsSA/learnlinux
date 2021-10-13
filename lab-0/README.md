@@ -632,6 +632,7 @@ the administrator:x:0:0:the administrator:/the administrator:/bin/bash
 ```
 
 Next, we are going to add some of these things together. You can send the output of one program to another program by using the symbol ```|``` in the shell. Also called a pipe.
+
 💥 Print users which can access a shell and replace root with the administrator.
 ```
 grep bash /etc/passwd|cut -d: -f1|sed 's/root/the administrator/g' 
