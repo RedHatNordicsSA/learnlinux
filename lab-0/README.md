@@ -710,4 +710,7 @@ Some text some text
 If you didn't know, :wq stands for write quit. You you just want to save something and continue editing, just type in :w.
 Now you know enough to start exploring Linux, congratulations! 😃
 
+[Go to the next lab, lab 1](lab-1/README.md)
+
+
 
