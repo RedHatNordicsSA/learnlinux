@@ -759,7 +759,28 @@ If you didn't know, :wq stands for write quit. You you just want to save somethi
 For the next lab, we will need some additional software to be in place. Software in Red Hat Enteprise Linux is put in packages called RPMs.
 RPMs are put in repositories where they are fetched to systems over HTTP, HTTPS or FTP. What repositories you enable on a system is configured in /etc/yum.repos.d where configuration files are dropped. When you then run the ```dnf``` command to install software, the system knows where to get the software.
 
-💥 Let's have a look at what is configured on our system. Run ```ls``` to list any files inside of the /etc/yum.repos.d directory.
+To view information about installed software, we can also use the ```rpm``` command.
+💥 List all install RPMs on the system and sort the output into alfabetic order
+```
+rpm -qa|sort
+```
+
+💥 View more information about a specific RPM
+```
+rpm -qi zlib
+```
+
+💥 View the changelog of an RPM
+```
+rpm -q zlib --changelog
+```
+
+💥 View what files an RPM deliver to the system
+ ```
+ rpm -ql zlib
+ ```
+
+💥 Let's have a look at which repositories are configured on our system. Run ```ls``` to list any files inside of the /etc/yum.repos.d directory.
 ```
 ls /etc/yum.repos.d
 ```
