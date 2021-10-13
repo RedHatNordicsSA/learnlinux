@@ -2,8 +2,7 @@
 Welcome to a hands on lab teaching some of the important basics of Red Hat Enterprise Linux.
 This includes:
 ```
-* Navigating in Linux
-* Common text editors
+* Command line fundamentals
 * Exploring the operating system
 ** Filesystems
 ** Processes
