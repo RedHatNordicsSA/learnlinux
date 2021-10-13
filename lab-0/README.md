@@ -25,7 +25,7 @@ linuxrules="a variable can also store text strings"
 
 💥 Let's test and set a variable in our shell and then use it. We are going to set a variable and then fetch the content of it. Run below command to set your variable.
 ```
-[ec2-user@ip-172-31-31-136 ~]$ reminder="I should go for a an hours walk every day"
+[ec2-user@ip-172-31-31-136 ~]$ reminder="I should go for a hours walk every day"
 ```
 
 💥 Next, we are going to fetch the value of the variable and print it out on the screen. We do that by running the command ```echo```, which prints things to the screen.
@@ -38,7 +38,7 @@ echo $reminder
 Expected output:
 ```
 [ec2-user@ip-172-31-31-136 ~]$ echo $reminder
-I should go for a an hours walk every day
+I should go for a hours walk every day
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
 
@@ -386,12 +386,26 @@ cat: secret: Permission denied
 chmod ug+r secret
 ```
 
-Did you think about something? What set the permissions in the first place? When you created the file:
-umask.
-TODO
+Did you consider something. What set the permissions in the first place? When you created the file.
+The answers is that there is a default setting called UMASK, which controlls what permissions should default to when files and directories are created.
 
+💥 Check what the umask of your system is set to by running the umask command:
+```
+umask
+```
 
-❗ Setting correct permissions on files is a security fundamental in Linux. But before you run off to remove read, write and execute permissions for anyone who is not an owner of a file on your Linux system, wait. If you do that, you will most likely break your system. Why is that? Because a lot of programs rely on being able to read files they don't own. For example, to be able to understand if a system has a specific setting or not which the program needs to adopt to.
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ umask
+0002
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+0002, means the default permissions for creating a file will be ```rw-r--r--```.
+
+⭐ If you want to dive further into how umask works, have a look here: https://man7.org/linux/man-pages/man2/umask.2.html
+
+❗ Setting correct permissions on files is a security fundamental in Linux, having very permissive access rights on files can be a serious security issue. But before you run off to remove read, write and execute permissions for anyone who is not an owner of a file on your Linux system, wait. If you do that, you may break your system. Why is that? Because a lot of programs rely on being able to read files they don't own. For example, to be able to understand if a system has a specific setting or not which the program needs to adopt.
 
 To conclude, to be able to set permissions on a need-to-know basis, we need to know a lot about both the system and the programs running on it.
 
@@ -425,4 +439,97 @@ Expected output:
 -bash: /etc/selinux/config: Permission denied
 [ec2-user@ip-172-31-31-136:22:07:07:~]$ 
 ```
+
+### Priviledged tasks
+Next, we're going to add a new user and group. Tasks like this requires admin priviledges.
+The default admin user in Linux is called _root_ and has user ID 0, to perform priviledged tasks, we will need to either become a priviledged user or to use a tool such as ```sudo```.
+
+💥 Add a new user called _test_.
+```
+sudo useradd test
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo useradd test
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+💥 Set the password for the user test, to something you remember.
+```
+sudo passwd test
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo passwd test
+Changing password for user test.
+New password: 
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+```
+
+The ```sudo``` command can be put infront of any command, to run that specific command with admin priviledges.
+Who can use the command and how the commmand can be used is controlled in a configuration file located in /etc/sudoers.
+
+💥 Let's have a look at that file, using the ```cat``` command.
+
+```
+cat /etc/sudoers
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ cat /etc/sudoers
+cat: /etc/sudoers: Permission denied
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+💥 We were not allowed to do that. Let's have a closer look on the file to figure out why, using the ```ls``` command.
+```
+ls -l /etc/sudoers
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ ls -l /etc/sudoers
+-r--r-----. 1 root root 4361 May  4 17:30 /etc/sudoers
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+Answer, permissions only allows the user and the group who owns the file to read it, the owning user and group is root.
+
+💥 Let's use sudo to be able to look at the file.
+```
+sudo cat /etc/sudoers
+```
+
+
+
+💥 Now that we have created a new local user, become the test user, using ```su```, see where you are and then list all files in the users home directory.
+```
+su - test
+pwd
+ls -la
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ su - test
+Password: 
+Last failed login: Wed Oct 13 07:00:19 UTC 2021 from 199.19.225.248 on ssh:notty
+[test@ip-172-31-31-136 ~]$ pwd
+/home/test
+[test@ip-172-31-31-136 ~]$ ls -la
+total 12
+drwx------. 2 test test  62 Oct 13 12:00 .
+drwxr-xr-x. 4 root root  34 Oct 13 12:00 ..
+-rw-r--r--. 1 test test  18 Apr 21 14:04 .bash_logout
+-rw-r--r--. 1 test test 141 Apr 21 14:04 .bash_profile
+-rw-r--r--. 1 test test 376 Apr 21 14:04 .bashrc
+```
+
+When we created the user, a home directory (/home/test) was also created for that user. If we look at the files that has been created they have permissions which 
+
+
 
