@@ -175,8 +175,36 @@ top
 ```
 
 ### Hardware
+To view the hardware the operating system runs on, there are a lot of different tools. These tools fetches information from the /proc filesystem, which means that you can also go there to get the unformated information.
 
+💥 Have a look at the systems CPU
+```
+lscpu
+```
 
+💥 Have a look at the systems memory
+```
+lsmem
+```
+
+💥 Exmine attached disks
+```
+sudo parted -l
+```
+
+💥 Have a look at various hardware devices described in the systems SMBIOS/DMI
+```
+sudo dmidecode
+```
+
+💥 Examine messages from the kernels ring buffer, where you find a lot of initialization information about hardware
+```
+dmesg
+```
+
+### Logs
+Most program generates logs. In Red Hat Enterprise Linux, systemd is responsible to store them.
+We can access the logs by using the ```journalctl``` command.
 
 
 
