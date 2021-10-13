@@ -54,6 +54,6 @@ If by some reason you get stuck in a lab - then here's what you should do. **Fol
 
 # Let's get started
 To go to the first lab in this hands on workshop, click here: 
-[Go to the next lab, lab 0](../lab-0/README.md)
+[Go to the next lab, lab 0](lab-0/README.md)
 
 
