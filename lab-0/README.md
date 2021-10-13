@@ -588,6 +588,64 @@ logout
 [ec2-user@ip-172-31-31-136 ~]$
 ```
 
+### Manipulating text and output and using pipe
+Next, there are a number of useful tools in Linux for doing text manipulation, allowing your to format, edit and search text.
+These tools are:
+
+```
+grep   Searches text in files
+cut    Removes sections from each line in a file
+sed    Allows you to manipulates text, such as printing, inserting, deleting and replacing content.
+```
+
+These tool are all extremely capable and can be used to a lot of things, at this point we'll just briefly introduce the tools together with a common usecase.
+
+💥 Use ```grep``` to find users which can access the BASH shell on our system
+```
+grep bash /etc/passwd
+```
+
+Example output:
+```
+[ec2-user@ip-172-31-31-136 etc]$ grep bash /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+ec2-user:x:1000:1000:Cloud User:/home/ec2-user:/bin/bash
+test:x:1001:1001::/home/test:/bin/bash
+[ec2-user@ip-172-31-31-136 etc]$
+```
+
+💥 Use ```cut``` to just print out username from the /etc/passwd file
+```
+cut -d: -f1 /etc/passwd
+```
+
+💥 Use ```sed``` to replace the username root with 'the administrator'
+```
+sed 's/root/the administrator/g' /etc/passwd
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sed 's/root/the administrator/g' /etc/passwd
+the administrator:x:0:0:the administrator:/the administrator:/bin/bash
+...
+```
+
+Next, we are going to add some of these things together. You can send the output of one program to another program by using the symbol ```|``` in the shell. Also called a pipe.
+💥 Print users which can access a shell and replace root with the administrator.
+```
+grep bash /etc/passwd|cut -d: -f1|sed 's/root/the administrator/g' 
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ grep bash /etc/passwd|cut -d: -f1|sed 's/root/the administrator/g' 
+the administrator
+ec2-user
+test
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
 ### Editing files
 Next thing which we need to know to be able to navigate the Linux operating system is how to edit files.
 The most common text editor in Linux is called ```vi```, which we'll have a quick look at.
