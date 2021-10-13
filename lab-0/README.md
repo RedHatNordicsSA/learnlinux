@@ -622,13 +622,13 @@ Some text you have input
 --- INSERT ---
 ```
 
-💥 Now it's time file and close the text editor by pressing ``ESC``` and then ```:wq``` and then ```ENTER```
+💥 Now it's time file and close the text editor by pressing ```ESC``` and then ```:wq``` and then ```ENTER```
 ```
 ESC
 :wq
 ```
 
-After you press ESC and type in :wq, it should appear in the bottom on the screen, before you press enter. As such:
+❗ After you press ESC and type in :wq, make sure ```:wq``` it should appear in the bottom on the screen, before you press enter. As such:
 ```
 Some text some text
 ~
@@ -638,6 +638,7 @@ Some text some text
 :wq
 ```
 
+If you didn't know, :wq stands for write quit. You you just want to save something and continue editing, just type in :w.
 Now you know enough to start exploring Linux, congratulations! 😃
 
 
