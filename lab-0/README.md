@@ -596,6 +596,9 @@ These tools are:
 grep   Searches text in files
 cut    Removes sections from each line in a file
 sed    Allows you to manipulates text, such as printing, inserting, deleting and replacing content.
+tail   Print the end of a file
+head   Print the start of a file
+diff   
 ```
 
 These tool are all extremely capable and can be used to a lot of things, at this point we'll just briefly introduce the tools together with a common usecase.
@@ -646,6 +649,13 @@ ec2-user
 test
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
+
+💥 Search for every time someone can the sudo command
+```
+journalctl -n10000|grep COMMAND
+```
+
+Expected 
 
 ### Editing files
 Next thing which we need to know to be able to navigate the Linux operating system is how to edit files.
