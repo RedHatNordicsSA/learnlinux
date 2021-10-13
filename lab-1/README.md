@@ -192,6 +192,11 @@ lsmem
 sudo parted -l
 ```
 
+💥 Check out your network devices
+```
+nmcli device show
+```
+
 💥 Have a look at various hardware devices described in the systems SMBIOS/DMI
 ```
 sudo dmidecode
@@ -246,6 +251,84 @@ ls /var/log
 ```
 sudo grep -i error /var/log/messages
 ```
+
+### Common services
+As you found when exploring services and processes, there are a lot of moving parts in Linux. Here's some of the more important ones.
+
+#### sshd
+The secure shell daemon is the default way you connect to Linux. It provides you with the terminal connection to your shell over an encryped channel.
+
+💥 Review the status of the sshd daemon
+```
+systemctl status sshd
+```
+
+💥 Review logs for the sshd daemon
+```
+journalctl -u sshd
+```
+
+The configuration for the daemon and the ssh client is located in /etc/ssh.
+Configuration for the service: /etc/ssh/sshd_config
+Configuration for the client: /etc/ssh/ssh_config
+
+### chronyd
+Chronyd is a service which syncronizes the clock on your system. Without time synchronization on your system you cannot tell when something happened, more importantly a lot of service depends on time to be synchronized across your systems.
+
+💥 Review the status of chronyd daemon
+```
+systemctl status chronyd
+```
+
+💥 Review logs for chronyd daemon
+```
+journalctl -u chronyd
+```
+
+💥 Check time synchronization on the system
+```
+chronyc tracking
+```
+
+#### NetworkManager
+The program which controls the systems network configuration is called Network Manager. 
+
+💥 Review the status of NetworkManager
+```
+systemctl status NetworkManager
+```
+
+💥 Review logs for NetworkManager
+```
+journalctl -u NetworkManager
+```
+
+💥 Review network configuration
+```
+nmcli
+nmcli device show
+```
+
+#### sssd
+SSSD provides a set of daemons to manage access to remote directories and authentication mechanisms.
+With the help of SSSD you can integrate your Linux system to Active Directory for example.
+
+💥 Review the status of sssd
+```
+systemctl status sssd
+```
+
+💥 Review logs for sssd
+```
+journalctl -u sssd
+```
+
+Configuration is stored in /etc/sssd.
+
+Now you know enough to get started with the more advanced topics, which is security. 😃
+
+[Go to the next lab, lab 2](../lab-2/README.md) 
+
 
 
 
