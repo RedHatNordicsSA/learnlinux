@@ -598,7 +598,7 @@ cut    Removes sections from each line in a file
 sed    Allows you to manipulates text, such as printing, inserting, deleting and replacing content.
 tail   Print the end of a file
 head   Print the start of a file
-diff   
+diff   See what differences there are between files
 ```
 
 These tool are all extremely capable and can be used to a lot of things, at this point we'll just briefly introduce the tools together with a common usecase.
@@ -636,23 +636,45 @@ the administrator:x:0:0:the administrator:/the administrator:/bin/bash
 
 Next, we are going to add some of these things together. You can send the output of one program to another program by using the symbol ```|``` in the shell. Also called a pipe.
 
-💥 Print users which can access a shell and replace root with the administrator.
+💥 Just print the first line of the /etc/passwd file using head
 ```
-grep bash /etc/passwd|cut -d: -f1|sed 's/root/the administrator/g' 
+head -1 /etc/passwd
 ```
 
 Expected output:
 ```
-[ec2-user@ip-172-31-31-136 ~]$ grep bash /etc/passwd|cut -d: -f1|sed 's/root/the administrator/g' 
-the administrator
-ec2-user
-test
+[ec2-user@ip-172-31-31-136 ~]$ head -1 /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+💥 Just print the last line of the /etc/passwd file using tail
+```
+tail -1 /etc/passwd
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ tail -1 /etc/passwd
+test:x:1001:1001::/home/test:/bin/bash
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
 
-💥 Search for every time someone can the sudo command
+💥 Print the first user which can access a shell and replace the text root with some text.
 ```
-journalctl -n10000|grep COMMAND
+grep bash /etc/passwd||head -1|cut -d: -f1|sed 's/root/the administrator account is configured with a shell/g' 
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ grep bash /etc/passwd|cut -d: -f1|sed 's/root/the administrator account is configured with a shell/g' 
+the administrator account is configured with a shell
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+💥 Search for when someone used the sudo command on the system during the past one day
+```
+journalctl --since "1 day ago"|grep COMMAND
 ```
 
 Expected 
