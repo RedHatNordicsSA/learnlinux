@@ -314,7 +314,7 @@ To change permissions for files and directories, first you need to have write ac
 
 Run below commands:
 ```
-echo "I still do not like broccoli" >secrets
+echo "I still do not like broccoli" >secret
 ```
 
 Expected output:
@@ -386,7 +386,49 @@ cat: secret: Permission denied
 chmod ug+r secret
 ```
 
-Did you consider something. What set the permissions in the first place? When you created the file.
+Another way to keep something secret, is to put it in a directory which has restricted access.
+💥 Create a directory using the ```mkdir``` command.
+```
+mkdir secretdir
+```
+
+💥 Next, move the secret file into this directory, using the ```mv``` (move) command.
+```
+mv secret secretdir/
+```
+
+💥 Let's check the permissions on our new directory.
+```
+ls -l
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ ls -l
+total 4
+drwxrwxr-x. 2 ec2-user ec2-user  6 Oct 13 17:43 secretdir
+```
+
+The secretdir was created with permissions for anyone on this system to go into the directory. You need read (r) and execute (x) access for that.
+
+💥 Remove the read and execute access for the directory and then try to enter into it using the change directory command ``cd``` and list files in it.
+```
+chmod a-rx secretdir
+cd secretdir
+ls secretdir
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ chmod a-rx secretdir
+[ec2-user@ip-172-31-31-136 ~]$ cd secretdir
+-bash: cd: secretdir: Permission denied
+[ec2-user@ip-172-31-31-136 ~]$ ls secretdir
+ls: cannot open directory 'secretdir': Permission denied
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+Did you consider something. What set the permissions in the first place? When you created the file or directory.
 The answers is that there is a default setting called UMASK, which controlls what permissions should default to when files and directories are created.
 
 💥 Check what the umask of your system is set to by running the umask command:
@@ -401,7 +443,7 @@ Expected output:
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
 
-0002, means the default permissions for creating a file will be ```rw-r--r--```.
+0002, means the default permissions for creating a file will be ```rw-r--r--``` and ```drwxr-xr-x``` for directories.
 
 ⭐ If you want to dive further into how umask works, have a look here: https://man7.org/linux/man-pages/man2/umask.2.html
 
@@ -413,7 +455,7 @@ To conclude, to be able to set permissions on a need-to-know basis, we need to k
 
 Run below commands:
 ```
-cat /etc/selinux/config
+ls /etc/selinux/config
 ```
 
 Expected output:
@@ -440,9 +482,15 @@ Expected output:
 [ec2-user@ip-172-31-31-136:22:07:07:~]$ 
 ```
 
+### Removing files
+To remove files, we use the command ```rm```. It's a very powerful command and should be used with great care. Especially if you are an admin user, you may accidentally remove important things which causes the operating system to stop working.
+
+Let's create some test files which we then can remove.
+
+
 ### Priviledged tasks
 Next, we're going to add a new user and group. Tasks like this requires admin priviledges.
-The default admin user in Linux is called _root_ and has user ID 0, to perform priviledged tasks, we will need to either become a priviledged user or to use a tool such as ```sudo```, which allows us access to doing priviledged tasks.
+The default admin user in Linux is called _root_ and has user ID 0, to perform priviledged tasks, we will need to either become a priviledged user or to use a tool such as ```sudo```, which allows us access to doing priviledged tasks. Sudo helps us to have a least priviledge approach to what we are doing, using a non-priviledged user when we can and only use priviledged access when we need to. This also helps us to reduce the number of system-fatal mistakes which we do as we learn and gain experience.
 
 💥 Add a new user called _test_.
 ```
@@ -501,43 +549,19 @@ Expected output:
 
 Answer, permissions only allows the user and the group who owns the file to read it, the owning user and group is root.
 
-💥 Let's use sudo to be able to look at the file.
+💥 Let's use sudo to be able to look at the file. We're going to use a new tool ```less``` to do that.
 ```
-sudo cat /etc/sudoers
-```
-
-Expected output:
-```
-...
-## The COMMANDS section may have other options added to it.
-##
-## Allow root to run any commands anywhere 
-root	ALL=(ALL) 	ALL
-
-## Allows members of the 'sys' group to run networking, software, 
-## service management apps and more.
-# %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS
-
-## Allows people in group wheel to run all commands
-%wheel	ALL=(ALL)	ALL
-
-## Same thing without a password
-# %wheel	ALL=(ALL)	NOPASSWD: ALL
-
-## Allows members of the users group to mount and unmount the 
-## cdrom as root
-# %users  ALL=/sbin/mount /mnt/cdrom, /sbin/umount /mnt/cdrom
-
-## Allows members of the users group to shutdown this system
-# %users  localhost=/sbin/shutdown -h now
-
-## Read drop-in files from /etc/sudoers.d (the # here does not mean a comment)
-#includedir /etc/sudoers.d
-ec2-user	ALL=(ALL)	NOPASSWD: ALL
+sudo less /etc/sudoers
 ```
 
-In this file we can see which users are allowed to do what with sudo.
+The ```less``` commands allows you to explore larger files by scrolling up and down in the file.
+Use the arrow keys or PgUp/Down to scroll. If you want to search for a keyword, type ```/thekeyword```.
+To exit ```less```, press ```q```.
+
+In /etc/sudoers file we can see which users are allowed to do what with sudo.
 Good to keep in mind is that when sudo is used, actions are logged. If we have a look at system logs, we can see when we accessed the sudoers file.
+
+If we are to edit 
 
 💥 Review last five lines of system logs using the journalctl command.
 ```
@@ -730,6 +754,81 @@ Some text some text
 ```
 
 If you didn't know, :wq stands for write quit. You you just want to save something and continue editing, just type in :w.
+
+### Installing software
+For the next lab, we will need some additional software to be in place. Software in Red Hat Enteprise Linux is put in packages called RPMs.
+RPMs are put in repositories where they are fetched to systems over HTTP, HTTPS or FTP. What repositories you enable on a system is configured in /etc/yum.repos.d where configuration files are dropped. When you then run the ```dnf``` command to install software, the system knows where to get the software.
+
+💥 Let's have a look at what is configured on our system. Run ```ls``` to list any files inside of the /etc/yum.repos.d directory.
+```
+ls /etc/yum.repos.d
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ ls /etc/yum.repos.d
+redhat-rhui-client-config-ha.repo  redhat-rhui-ha.repo
+```
+
+💥 Next, let's look into one of those files using ```less```
+```
+less /etc/yum.repos.d/redhat-rhui-ha.repo
+```
+
+In the file, you can see multiple repositories configured for the system. When we now will install software, yum searches through the available repositories until it finds (or not finds) the software we want to install.
+
+💥 Install tree, a pieces of software which allows us to display directory structures more easily.
+```
+sudo dnf install tree
+```
+
+❗ You need to answer yes (y) before the software actually installs.
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo dnf install tree
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+
+Last metadata expiration check: 0:00:17 ago on Wed 13 Oct 2021 05:59:55 PM UTC.
+Dependencies resolved.
+==============================================================================================================================================================================================================================================
+ Package                                           Architecture                                        Version                                                     Repository                                                            Size
+==============================================================================================================================================================================================================================================
+Installing:
+ tree                                              x86_64                                              1.7.0-15.el8                                                rhel-8-baseos-rhui-rpms                                               59 k
+
+Transaction Summary
+==============================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 59 k
+Installed size: 109 k
+Is this ok [y/N]: y
+Downloading Packages:
+tree-1.7.0-15.el8.x86_64.rpm                                                                                                                                                                                  750 kB/s |  59 kB     00:00    
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                                                         498 kB/s |  59 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                                                                                                                      1/1 
+  Installing       : tree-1.7.0-15.el8.x86_64                                                                                                                                                                                             1/1 
+  Running scriptlet: tree-1.7.0-15.el8.x86_64                                                                                                                                                                                             1/1 
+  Verifying        : tree-1.7.0-15.el8.x86_64                                                                                                                                                                                             1/1 
+Installed products updated.
+
+Installed:
+  tree-1.7.0-15.el8.x86_64                                                                                                                                                                                                                    
+
+Complete!
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
 Now you know enough to start exploring Linux, congratulations! 😃
 
 [Go to the next lab, lab 1](../lab-1/README.md)
