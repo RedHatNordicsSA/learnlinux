@@ -323,7 +323,7 @@ Expected output:
 [ec2-user@ip-172-31-31-136:21:42:21:~]$
 ```
 
-Above uses the echo command, which prints text to the terminal to create a file. We do this by using a built in function in our shell, which redirects the text we print from the standard output device, to a file called secrets. This is useful, as almost any command's output can be redirected in a file in this way.
+Above uses the echo command, which prints text to the terminal to create a file. We do this by using a built in function in our shell, which redirects the text we print from the standard output device, to a file called secret. This is useful, as almost any command's output can be redirected in a file in this way.
 
 💥 Let's have a look at the file, by using the ```cat``` command again.
 
@@ -338,6 +338,31 @@ Expected output:
 I still do not like broccoli
 [ec2-user@ip-172-31-31-136:21:46:34:~]$ 
 ```
+
+Next, let's explore moving and copying files. Let's start by moving our secret file.
+💥 Rename your file to .secret to hide the file from open view.
+
+Run below commands:
+```
+mv secret .secret
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ mv secret .secret
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+Verify that the file is hidden by running ```ls```.
+
+💥 Now, let's trying copying.
+
+Run below commands:
+```
+cp .secret .secret.backup
+```
+
+Verify that the file was copied by running ```ls```.
 
 To change permissions on files, we use the ```chmod``` command. Use ```man chmod``` to find out more about how it works.
 The different people we can give permissions to, if you remember, is: user, group, other. In the command we refer to them as such:
