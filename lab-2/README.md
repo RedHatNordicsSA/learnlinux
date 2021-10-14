@@ -18,9 +18,13 @@ Keeping your system updated though, is mainly about three things.
 
 #### Testing
 In a perfect world, no software vendor would have bugs, in reality, all software is in different broken states, because software is written by humans.
-So we need to have test environments, where we with less impact on the business can test out updates. A good way to start and approach testing is to start and focus on key features. How do you in one simple test prove that most of the functionality in your system works? Perhaps by connecting to the system via SSH and then running ```ls```. That proves that large parts of the functionality we depend on, such as networking, storage and the operating system, is indeed working. If you do not test, then you are rolling a dice and that will make it difficult to create suffient trust in the organisation to be allowed to update systems on a regular basis (I don't mean once per year now...).
+So we need to have test environments, where we with less impact on the business can test out updates. A good way to start and approach testing is to start and focus on key features. 
 
-👍 The best way to reduce the need of testing, is by running solutions which has forward compatibility. Red Hat Enterprise Linux is the only Linux operating system which provides solid forward compatibility. Simplified, this is done by backporting bug fixes, security updates and new features into software versions that was selected for a new major release of the operating system. This significantly reduces the need to do testing. We have customers who in diverse environments with thousands of different applications patches systems hundreds of thousands of times, without business critical business outage. That is valuable and would very difficult without forward compatibility.
+How do you in one simple test prove that most of the functionality in your Linux system works? Perhaps by connecting to the system via SSH and then running ```ls```. That proves that large parts of the functionality we depend on, such as networking, storage and the operating system, is indeed working.
+
+If you do not test, then you are rolling a dice and that will make it difficult to create suffient trust in the organisation to be allowed to update systems on a regular basis (I don't mean once per year now...).
+
+👍 The best way to reduce the need of testing, is by running solutions which has forward compatibility. Red Hat Enterprise Linux is the only Linux operating system which provides solid forward compatibility. Simplified, this is done by backporting bug fixes, security updates and new features into software versions that was selected for a new major release of the operating system. This significantly reduces the need to do testing. We at Red Hat have customers who in diverse environments with thousands of different applications patches systems hundreds of thousands of times in a year, without business critical business outage. That is valuable and would very difficult without forward compatibility.
 
 ⭐ Read more about the Red Hat Enterprise Linux ABI (forward compatibility) here: https://access.redhat.com/articles/rhel8-abi-compatibility
 
