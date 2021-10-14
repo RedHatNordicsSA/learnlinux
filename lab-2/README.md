@@ -122,7 +122,7 @@ getenforce
 If the command returns ```Enforcing```, that means SELinux is protecting your system.
 
 In order to learn a bit about how SELinux is protecting the system, we'll demonstrate what happens when a web application get's hacked, with and without SELinux.
-In order to do this, we will a web server and run a php application which provides a shell to the system, this emulates a successful compromise to the system.
+In order to do this, we will install a web server and run a php application which provides a shell to the system, this emulates a successful compromise of a web application on this system.
 
 💥 Disable the web console, as we'll be using the same port is it.
 ```
