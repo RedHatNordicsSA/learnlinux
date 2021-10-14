@@ -812,7 +812,7 @@ The most common text editor in Linux is called ```vi```, which we'll have a quic
 
 💥 Create a new file and start editing it using ```vi```
 ```
-vi testfile
+vi testscript
 ```
 
 Expected output:
@@ -822,17 +822,17 @@ Expected output:
 ~
 ~
 ~
-"testfile" [New File]
+"testscript" [New File]
 ```
 
-💥 To start inserting text, press ```i``` which stands for insert. To remove text, use backspace.
+💥 To start inserting text, press ```i``` which stands for insert. To remove text, use backspace. Insert an echo command.
 ```
 i
 ```
 
 Expected output:
 ```
-Some text you have input
+echo "Hello world"
 ~
 ~
 ~
@@ -856,7 +856,35 @@ Some text some text
 :wq
 ```
 
-If you didn't know, :wq stands for write quit. You you just want to save something and continue editing, just type in :w.
+If you didn't know, :wq stands for write quit. You you just want to save something and continue editing, just type in :w. If you just want to quick without saving type :q!
+
+💥 Next, let's run the script we created. 
+```
+./testscript
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ ./testscript
+-bash: ./testscript: Permission denied
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+This is what we should have expected, it's because by creating a file, the execution permission is not added automatically.
+
+💥 Add executive rights on the file and rerun the command.
+```
+chmod u+x testscript
+./testscript
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ chmod u+x testscript
+[ec2-user@ip-172-31-31-136 ~]$ ./testscript 
+Hello world
+[ec2-user@ip-172-31-31-136 ~]$
+```
 
 ### Installing software
 For the next lab, we will need some additional software to be in place. Software in Red Hat Enteprise Linux is put in packages called RPMs.
