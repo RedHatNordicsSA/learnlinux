@@ -232,6 +232,8 @@ DESCRIPTION
 
 Now we know how to find hidden files.
 
+👍 If you want to learn more about a command, viewing the manual page of the command is a good way to start. Remember that as we move forwards in the lab.
+
 💥 Look at all the hidden files in your home directory.
 
 Run below commands:
@@ -389,26 +391,26 @@ Above, we assign read and write access to both the user and the group which owns
 
 Run below commands:
 ```
-chmod ug-r secret
+chmod ug-r .secret
 ```
 
 💥 Try to see the content of the file, using ```cat```.
 
 Run below commands:
 ```
-cat secret
+cat .secret
 ```
 
 Expected output:
 ```
-[ec2-user@ip-172-31-31-136:21:58:12:~]$ cat secret
-cat: secret: Permission denied
+[ec2-user@ip-172-31-31-136:21:58:12:~]$ cat .secret
+cat: .secret: Permission denied
 [ec2-user@ip-172-31-31-136:21:58:15:~]$ 
 ```
 
 💥 Now let's change the permissions so that user and group can read the file again.
 ```
-chmod ug+r secret
+chmod ug+r .secret
 ```
 
 Another way to keep something secret, is to put it in a directory which has restricted access.
@@ -419,7 +421,7 @@ mkdir secretdir
 
 💥 Next, move the secret file into this directory, using the ```mv``` (move) command.
 ```
-mv secret secretdir/
+mv .secret secretdir/
 ```
 
 💥 Let's check the permissions on our new directory.
@@ -510,8 +512,66 @@ Expected output:
 ### Removing files
 To remove files, we use the command ```rm```. It's a very powerful command and should be used with great care. Especially if you are an admin user, you may accidentally remove important things which causes the operating system to stop working.
 
-Let's create some test files which we then can remove.
+💥 Let's create some test files which we then can remove. Below commands will create a number of files in your home directory.
+```
+for i in {1..1000}; do touch file-$i; done
+```
 
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ for i in {1..1000}; do touch file-$i; done
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+Verify that the files were created by using ```ls```.
+
+💥 Next, we'll remove the write permissions on a number of the files.
+```
+chmod a-w file-7*
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ chmod a-w file-7*
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+Now, if you imagine that we need to delete these files, deleting them one by one would take a bit too long. The shell has some built in functions that allows us to easily run a command on a larger number of things.
+
+💥 Remove one file
+```
+rm file-1
+```
+
+💥 Remove all test files
+```
+rm file-*
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ rm file-*
+rm: remove write-protected regular empty file 'file-7'? y
+rm: remove write-protected regular empty file 'file-70'? y
+rm: remove write-protected regular empty file 'file-700'? ^C
+```
+
+When a file does not have write permissions, ```rm``` will ask the user if it should really be removed. Here we have two options, to set write permissions for the files or to just ask ```rm``` to remove the files anyways.
+
+💥 Use the manpage for ```rm``` to figure out how to remove all the files without having to enter in y, one hundred times.
+```
+man rm
+```
+
+💥 Now delete all the files without getting prompted...
+<details>
+<summary>I could use some help...</summary>
+<p>
+```
+rm file-* -f
+```
+</p>
+</details> 
 
 ### Priviledged tasks
 Next, we're going to add a new user and group. Tasks like this requires admin priviledges.
