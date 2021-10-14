@@ -5,12 +5,28 @@ Next, we are going to explore the different parts of the operating system, using
 If it helps, everything in Linux is files. Disk devices, network devices, directories, links, it's all files. So to explore the operating system is to explore a bunch of files.
 Before we can start with that, it helps to know where different files normally lives.
 
+💥 Explore the ```tree``` command.
+```
+man tree
+```
+
 💥 Use the ```tree``` command which we installed in lab-0 to explore the filesystem.
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 tree / -L 1
 ```
+</p>
+</details> 
+
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ tree / -L 1
 /
@@ -35,6 +51,9 @@ Expected output:
 ├── usr
 └── var
 ```
+</p>
+</details> 
+
 
 Now, let's review what we got here.
 ```
@@ -70,14 +89,30 @@ ls
 less login.defs
 ```
 
-Directories are all connected to different storage devices. Too view these there are a couple of different useful tools.
+Directories are all connected to different storage devices. Too view these there are a couple of different useful tools. Let's start with ```lsblk```.
+
+💥 Explore the ```lsblk``` command
+```
+man lsblk
+```
+
 💥 List all block devices on the system together with that filesystems which are mounted.
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 lsblk
 lsblk -f
 ```
+</p>
+</details> 
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 etc]$ lsblk
 NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
@@ -91,15 +126,32 @@ xvda
 └─xvda2 xfs          d35fe619-1d06-4ace-9fe3-169baad3e421 /
 [ec2-user@ip-172-31-31-136 etc]$  
 ```
+</p>
+</details>
 
 Here we can see that we have a disk device called xvda which has two partitions on it, one of those partitions is connected to a XFS filesystem (default in Red Hat Enterprise Linux) which is mounted at /. That means that all directories which are on temporary filesystem are stored on that disk.
 
-💥 List filesystem utilization
+💥 Explore the ```df``` command
+```
+man df
+```
+
+💥 List filesystem utilization in a way you can read it easily
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 df -h
 ```
+</p>
+</details> 
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 etc]$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
@@ -111,20 +163,38 @@ tmpfs           404M     0  404M   0% /sys/fs/cgroup
 tmpfs            81M     0   81M   0% /run/user/1000
 [ec2-user@ip-172-31-31-136 etc]$ 
 ```
+</p>
+</details> 
 
 Here we can see some of the temporary filesystems as well as the /dev/xvda2 device file which points to the partition where we keep the XFS filesystem.
 
 ### Processes and services
 To build yourself an idea of what is running on a system is important for both understanding the system and troubleshooting it.
 
-To list running processes system wide, we can use the command ```ps```.
+To list running processes, we can use the command ```ps```.
+
+💥 Explore the ps command
+```
+man ps
+```
 
 💥 List all currently running programs spawned from your own user
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 ps
 ```
+</p>
+</details> 
+
 
 Example output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 etc]$ ps
     PID TTY          TIME CMD
@@ -132,13 +202,21 @@ Example output:
  108369 pts/1    00:00:00 ps
 [ec2-user@ip-172-31-31-136 etc]$ 
 ```
+</p>
+</details> 
 
 Each process is assigned an unique so called process id, or PID, when it's started.
 
 💥 Next, list all processes systemwide.
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 ps -ef
 ```
+</p>
+</details> 
 
 The first processes spawned in Red Hat Enterprise Linux is systemd, which is the system and services program which in Red Hat Enterprise Linux also initializes the operating system at boot. But there are a lot of processes in the list that you probably never heard about. Sometimes, the ```man``` command can help and tell us what is what, in other cases, we can use ```rpm``` or ```dnf``` to identify what RPM owns a file and then get more info.
 
@@ -151,16 +229,25 @@ root       71700       1  0 Oct11 ?        00:00:03 /usr/libexec/packagekitd
 man packagekitd
 rpm -q --whatprovides /usr/libexec/packagekitd
 rpm -qi PackageKit
-dnf whatprovides /usr/libexec/packagekitd
-dnf info PackageKit
 ```
 
 If you want to list the different services running in the system, we can use the ```systemctl``` command.
 
+💥 Explore the systemctl command
+```
+man systemctl
+```
+
 💥 List all currently running processes on your server
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 systemctl list-unit-files
 ```
+</p>
+</details> 
 
 💥 Select five different running services and run a status command on it.
 Example:
@@ -169,10 +256,22 @@ systemctl status tuned
 ```
 
 If we want to see a live process list, we can use a tool such as ```top```.
+
+💥 Explore the top command
+```
+man top
+```
+
 💥 Review which processes consumes the most resources
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 top
 ```
+</p>
+</details> 
 
 ### Hardware
 To view the hardware the operating system runs on, there are a lot of different tools. These tools fetches information from the /proc filesystem, which means that you can also go there to get the unformated information.
@@ -242,6 +341,7 @@ journalctl _UID=$UID
 ```
 
 Logs can also be found stored in files in /var/log.
+
 💥 List logs files
 ```
 ls /var/log
