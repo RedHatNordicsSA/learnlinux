@@ -169,6 +169,10 @@ ps -ef
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 $ ps -ef
 UID          PID    PPID  C STIME TTY          TIME CMD
@@ -192,6 +196,8 @@ apache    115499  114584  0 10:45 ?        00:00:00 sh -c export ROWS=24 export
 apache    115500  115499  0 10:45 ?        00:00:00 ps -ef
 $
 ```
+</p>
+</details> 
 
 Please note that what we are seeing here are not all the processes in the system. This is due to SELinux enforcing more granular access controls on the Apache webserver. Apache does not need to see all processes in the system, so it's not allowed. This, even though the apache user, can see them.
 
@@ -201,6 +207,10 @@ rpm -qa
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 $ rpm -qa
 error: cannot open Packages index using db5 - Permission denied (13)
@@ -208,6 +218,8 @@ error: cannot open Packages database in /var/lib/rpm
 error: cannot open Packages index using db5 - Permission denied (13)
 error: cannot open Packages database in /var/lib/rpm
 ```
+</p>
+</details> 
 
 💥 Have a look at the kernel ring buffer
 ```
@@ -215,10 +227,16 @@ dmesg
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 $ dmesg
 dmesg: read kernel buffer failed: Permission denied
 ```
+</p>
+</details> 
 
 💥 Now we are going to disable SELinux on the system. **Never** do this on an actual system. If anyone questions this, it likely means that they do not understand what they are talking about.
 ```
@@ -276,22 +294,34 @@ sudo firewall-cmd --state
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --state
 running
 [ec2-user@ip-172-31-31-136 ~]$
 ```
+</p>
+</details> 
 
 💥 Try to access the web console of your system and see what happens.
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 This site can’t be reached
 https://ec2-18-195-46-93.eu-central-1.compute.amazonaws.com/ is unreachable.
 ERR_ADDRESS_UNREACHABLE
-``` 
+```
+</p>
+</details>  
 
-The reason why we haven't been kicked out of the system is because already established connections and the ```sshd``` service is allowed by default.
+The reason why we haven't also been kicked out of the system is because already established connections and the ```sshd``` service is allowed by default.
 
 💥 Review the current rules of the system.
 ```
@@ -299,6 +329,10 @@ sudo firewall-cmd --list-all
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --list-all
 public (active)
@@ -316,6 +350,8 @@ public (active)
   rich rules: 
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
+</p>
+</details> 
 
 Let's add https. Here's we use the services concept which firewalld has, where we can enable a service and no have to think about what ports and protocols are in use.
 
@@ -325,11 +361,17 @@ firewall-cmd --get-services
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ firewall-cmd --get-services
 RH-Satellite-6 amanda-client amanda-k5-client amqp amqps apcupsd audit bacula bacula-client bb bgp bitcoin bitcoin-rpc bitcoin-testnet bitcoin-testnet-rpc bittorrent-lsd ceph ceph-mon cfengine cockpit collectd condor-collector ctdb dhcp dhcpv6 dhcpv6-client distcc dns dns-over-tls docker-registry docker-swarm dropbox-lansync elasticsearch etcd-client etcd-server finger freeipa-4 freeipa-ldap freeipa-ldaps freeipa-replication freeipa-trust ftp galera ganglia-client ganglia-master git grafana gre high-availability http https imap imaps ipp ipp-client ipsec irc ircs iscsi-target isns jenkins kadmin kdeconnect kerberos kibana klogin kpasswd kprop kshell kube-apiserver ldap ldaps libvirt libvirt-tls lightning-network llmnr managesieve matrix mdns memcache minidlna mongodb mosh mountd mqtt mqtt-tls ms-wbt mssql murmur mysql nfs nfs3 nmea-0183 nrpe ntp nut openvpn ovirt-imageio ovirt-storageconsole ovirt-vmconsole plex pmcd pmproxy pmwebapi pmwebapis pop3 pop3s postgresql privoxy prometheus proxy-dhcp ptp pulseaudio puppetmaster quassel radius rdp redis redis-sentinel rpc-bind rquotad rsh rsyncd rtsp salt-master samba samba-client samba-dc sane sip sips slp smtp smtp-submission smtps snmp snmptrap spideroak-lansync spotify-sync squid ssdp ssh steam-streaming svdrp svn syncthing syncthing-gui synergy syslog syslog-tls telnet tentacle tftp tftp-client tile38 tinc tor-socks transmission-client upnp-client vdsm vnc-server wbem-http wbem-https wsman wsmans xdmcp xmpp-bosh xmpp-client xmpp-local xmpp-server zabbix-agent zabbix-server
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
+</p>
+</details> 
 
 Here we can see https listed, good.
 
@@ -339,11 +381,17 @@ sudo firewall-cmd --zone=public --add-service=https
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --zone=public --add-service=https
 success
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
+</p>
+</details> 
 
 💥 Now refresh the web console web page and verify that you again have access.
 
@@ -353,11 +401,17 @@ sudo firewall-cmd --zone=public --add-service=https --permanent
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --zone=public --add-service=https --permanent
 success
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
+</p>
+</details> 
 
 ### Cryptographic hardening
 At any time, there are a large number of applications runnning on a system. A main concern is what type of cryptographic algoritms are used in those applications.
