@@ -391,6 +391,7 @@ We can access the logs by using the ```journalctl``` command.
 man journalctl
 ```
 
+
 💥 Review the full system logs. Quit by pressing ```q```
 <details>
 <summary>I could use some help...</summary>
@@ -401,6 +402,7 @@ journalctl
 ```
 </p>
 </details> 
+
 
 
 💥 Review logs for the boot process
@@ -415,6 +417,7 @@ journalctl -b
 </details> 
 
 
+
 💥 Review logs for a specific service
 <details>
 <summary>I could use some help...</summary>
@@ -425,6 +428,7 @@ journalctl -u tuned
 ```
 </p>
 </details> 
+
 
 
 💥 Follow the live log stream
@@ -439,6 +443,7 @@ journalctl -f
 </details> 
 
 
+
 💥 Fetch logs since a specific time range
 <details>
 <summary>I could use some help...</summary>
@@ -449,6 +454,7 @@ journalctl --since "1 hour ago"
 ```
 </p>
 </details> 
+
 
 
 💥 Fetch all logs for your user, using the $UID environment variable which containers the user id of our user.
@@ -463,6 +469,7 @@ journalctl _UID=$UID
 </details> 
 
 Logs can also be found stored in files in /var/log.
+
 
 
 💥 List logs files
