@@ -422,7 +422,7 @@ Once a system-wide policy is set up, applications in RHEL follow it and refuse t
 
 It's now time to stop following this guide blindly 😅 and get some more information from a more complete source. For security that is the Red Hat Enterprise Linux Security Hardening guide.
 
-❗ You will be asked to try out some examples outlined in the documentation, but **DO NOT** reboot your system and that will cause you to loose access to it **for ever**.
+❗ You will be asked to try out some examples outlined in the documentation, but **DO NOT** reboot your system as that will cause you to loose access to it **for ever**.
 
 💥 Have a a look at below chapters and try out the examples described in them. You can find the documentation here: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/security_hardening/index#using-the-system-wide-cryptographic-policies_security-hardening
 
