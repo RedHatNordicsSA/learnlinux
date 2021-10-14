@@ -787,7 +787,24 @@ the administrator account is configured with a shell
 journalctl --since "1 day ago"|grep COMMAND
 ```
 
-Expected 
+💥 Create two files and compare them
+```
+echo "This is the same" >file1
+echo "This is different" >>file1
+echo "This is the same" >file2
+diff -y file1 file2
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ diff -y file1 file2
+This is the same						This is the same
+This is different					      <
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+The ```diff``` command is very powerful, as it allowed us to compare any files with each other, a key trick when we do troubleshooting.
+
 
 ### Editing files
 Next thing which we need to know to be able to navigate the Linux operating system is how to edit files.
