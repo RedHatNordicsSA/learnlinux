@@ -189,7 +189,7 @@ dmesg: read kernel buffer failed: Permission denied
 sudo setenforce 0
 ```
 
-💥 Now let's run the same commands (```ps -ef```, ```rpm -qa```, ```dmesg``` again, on our phpshell applications.
+💥 Now let's run the same commands (```ps -ef```, ```rpm -qa```, ```dmesg```) again, on our phpshell application.
 
 Expected result:
 * You see all processes
