@@ -4,6 +4,10 @@ Some of them you have already discovered, like file permissions and encrypted ma
 
 The topic of security is vast and is not something easily understood by people who are starting to learn about Linux, but we will try and cover key topics.
 
+### Keeping your system updated
+The most difficult challenge is not how to apply security hardening on systems, it's how to keep your systems updated.
+
+
 ### Limiting the attack vector
 The more things you have running on a system, the more things can be exploited by bad actors. A first step is to review what is running on your system and disable what is not needed.
 
@@ -217,7 +221,9 @@ sudo systemctl start cockpit.socket
 Now that you know why to never run Linux without SELinux enabled, you are good to go to the next section.
 
 ### Firewalling
-Good security is built like an onion, in layers. Just because you have firewalls in your network, doesn't mean that you shouldn't do filtering on the host level as well. Red Hat Enterprise Linux comes with very capable network filtering features. It also provides a daemon which helps manage your local firewall rules, called firewalld. Let's explore it.
+Good security is built like an onion, in layers. Just because you have firewalls in your network, doesn't mean that you shouldn't do filtering on the host level as well. Network firewalls often only filter some of the traffic and often not traffic which happens in the local networks. 
+
+Red Hat Enterprise Linux comes with very capable network filtering features. It also provides a daemon which helps manage your local firewall rules, called firewalld. Let's explore it.
 
 💥 First, install firewalld.
 ```
@@ -318,9 +324,57 @@ success
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
 
-### Audit
+### Cryptographic hardening
+At any time, there are a large number of applications runnning on a system. A main concern is what type of cryptographic algoritms are used in those applications.
+The field of cryptography is not static, new attacks are constantly invented. The cryptographic algorithms from a number of years ago may no longer be keeping your data safe. The challenge is to know what algorithms are safe and how to make applications used those safe algorithms.
+
+The solution to this challenge in Red Hat Enterprise Linux is the system-wide cryptographic policy.
+Once a system-wide policy is set up, applications in RHEL follow it and refuse to use algorithms and protocols that do not meet the policy, unless you explicitly request the application to do so.
+
+It's now time to stop following this guide blindly 😅 and get some more information from a more complete source. For security that is the Red Hat Enterprise Linux Security Hardening guide.
+
+❗ You will be asked to try out some examples outlined in the documentation, but **DO NOT** reboot your system and that will cause you to loose access to it **for ever**.
+
+💥 Have a a look at below chapters and try out the examples described in them. You can find the documentation here: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/security_hardening/index#using-the-system-wide-cryptographic-policies_security-hardening
+
+💥 Go through the below chapters:
+```
+5.1. System-wide cryptographic policies
+5.2. Switching the system-wide cryptographic policy to mode compatible with earlier releases
+5.3. Switching the system to FIPS mode
+```
+
+### Auditing
 You have already learned a bit about auditing log files. In this section we'll introduce two more tools which allows you to audit what's happening in the system.
-Using no additional audit tools, we are often in the hands on what an application or the operating system deems suitable to log. In more security sensitive environments, we often want to log more. After a system has been attacked, it's critical that we learn what functions and data was compromised, for this, there are two tools, ```auditd``` and ```AIDE```.
+Using no additional audit tools, we are often in the hands on what an application or the operating system deems suitable to log. In more security sensitive environments, we often want to log more. After a system has been attacked, it's critical that we learn what functions and data was compromised, for this, there are two main tools, ```auditd``` and ```AIDE```.
 
 
-Auditd/AIDE
+#### Auditd
+To learn about how to setup and use the main auditing tool in Linux, we're again going to use the official Security Hardening guide for Red Hat Enterprise Linux.
+
+💥 Have a look in the official Red Hat Enterprise Linux Security Hardening guide to learn about how to install and configure Auditd. It's found here: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/security_hardening/index#linux-audit_auditing-the-system
+
+💥 Go through and try out the examples shown in the below chapters:
+```
+13.1. Linux Audit
+13.2. Audit system architecture
+13.3. Configuring auditd for a secure environment
+13.3. Configuring auditd for a secure environment
+13.5. Understanding Audit log files
+13.6. Using auditctl for defining and executing Audit rules
+13.7. Defining persistent Audit rules
+13.8. Using pre-configured rules files
+```
+
+#### AIDE
+AIDE or Advanced Intrusion Detection Environment is a tool which can help you detect intrusions. It does this by generating a database of the files on your system so that it can detect if any of them was tampered with or changed in any way.
+
+💥 Again, use the Red Hat Enterprise Linux Security Hardening guide to learn how to use AIDE. The chapter on AIDE is found here: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/security_hardening/index#checking-integrity-with-aide_security-hardening
+
+💥 Go through and try out the examples shown in the below chapters:
+```
+10.1. Installing AIDE
+10.2. Performing integrity checks with AIDE
+10.3. Updating an AIDE database
+```
+
