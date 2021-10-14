@@ -278,6 +278,8 @@ top
 ### Hardware
 To view the hardware the operating system runs on, there are a lot of different tools. These tools fetches information from the /proc filesystem, which means that you can also go there to get the unformated information.
 
+#### CPU
+
 💥 Explore the lscpu command
 ```
 man lscpu
@@ -295,6 +297,7 @@ lscpu
 </p>
 </details> 
 
+#### Memory
 💥 Explore the lsmem command
 ```
 man lsmem
@@ -311,6 +314,7 @@ lsmem
 </p>
 </details> 
 
+#### Disks
 💥 Explore the parted command
 ```
 man parted
@@ -327,6 +331,7 @@ sudo parted -l
 </p>
 </details> 
 
+#### Network devices
 💥 Explore the nmcli command
 ```
 man nmcli
@@ -343,6 +348,7 @@ nmcli device show
 </p>
 </details> 
 
+#### General hardware
 💥 Explore the dmidecode command
 ```
 man dmidecode
@@ -358,6 +364,7 @@ sudo dmidecode
 ```
 </p>
 </details> 
+
 
 💥 Explore the dmesg command
 ```
@@ -395,6 +402,7 @@ journalctl
 </p>
 </details> 
 
+
 💥 Review logs for the boot process
 <details>
 <summary>I could use some help...</summary>
@@ -405,6 +413,7 @@ journalctl -b
 ```
 </p>
 </details> 
+
 
 💥 Review logs for a specific service
 <details>
@@ -417,6 +426,7 @@ journalctl -u tuned
 </p>
 </details> 
 
+
 💥 Follow the live log stream
 <details>
 <summary>I could use some help...</summary>
@@ -428,6 +438,7 @@ journalctl -f
 </p>
 </details> 
 
+
 💥 Fetch logs since a specific time range
 <details>
 <summary>I could use some help...</summary>
@@ -438,6 +449,7 @@ journalctl --since "1 hour ago"
 ```
 </p>
 </details> 
+
 
 💥 Fetch all logs for your user, using the $UID environment variable which containers the user id of our user.
 <details>
@@ -451,6 +463,7 @@ journalctl _UID=$UID
 </details> 
 
 Logs can also be found stored in files in /var/log.
+
 
 💥 List logs files
 ```
