@@ -8,7 +8,7 @@ The topic of security is vast and is not something easily understood by people w
 The most difficult challenge is not how to apply security hardening on systems, it's how to keep your systems updated.
 To update our system in Red Hat Enterprise Linux, we simply run the below command:
 ```
-sudo dnf update -y
+sudo dnf update
 ```
 
 Keeping your system updated though, is mainly about three things.
@@ -32,10 +32,11 @@ In a perfect world, it's always possible to take systems offline to patch them, 
 👍 Another best practice is to talk to and collaborate with the people who affects your life cycle. If you depend on X to run your things, ensure you know what the future life cycle of X looks like.
 
 #### Automation
-In a perfect world, all applications are delivered with enough automation that they manages themselfs, in reality, few does. It's common that a piece of software comes with a manual, instead of a script and automatics. This means that doign things like testing and updating systems and software requires humans to follow guides and enter information into terminals, which does not scale. In turn, this means that we cannot update as often, as humans with skills and experience are limited resources in most companies.
+In a perfect world, all applications are delivered with enough automation that they manages themselfs, in reality, few does. It's common that a piece of software comes with a manual, instead of a script and automatics. This means that doign things like testing and updating systems and software requires humans to follow documentation and enter information into terminals and click on buttons, which does not scale. It means that we cannot update as often, as humans with skills and experience are limited resources in most companies.
 
-👍 In order to 
+👍 In order to get things into an automated state, most importantly, we need an automation strategy. Automation will not reach a sufficient state if the company is relying on good will and individual or team initiatives. To read about the key components of an automation strategy worth it's paper, see here: https://www.linkedin.com/pulse/what-serious-automation-strategy-looks-like-magnus-glantz/
 
+👍 If you are impatient and want to start with automation on Linux today, why not try out the most popular automation framework today, Ansible. Learn more here: https://www.ansible.com/overview/how-ansible-works
 
 ### Limiting the attack vector
 The more things you have running on a system, the more things can be exploited by bad actors. A first step is to review what is running on your system and disable what is not needed.
@@ -43,6 +44,8 @@ The more things you have running on a system, the more things can be exploited b
 💥 Review what services are running on your system and find something which is not needed.
 ```
 systemctl list-unit-files
+rpm -qa
+netstat -tulpn
 ```
 
 ❗ If you are not sure what you can disable, look below. In this lab, do **not** disable the ```sshd``` service.
@@ -407,3 +410,6 @@ AIDE or Advanced Intrusion Detection Environment is a tool which can help you de
 10.3. Updating an AIDE database
 ```
 
+Congratulations, you've are now better equipped to understand security in Linux. 😃
+
+Next chapter is about troubleshooting.
