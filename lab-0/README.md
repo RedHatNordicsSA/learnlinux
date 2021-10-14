@@ -29,8 +29,6 @@ linuxrules="a variable can also store text strings"
 ```
 
 💥 Next, we are going to fetch the value of the variable and print it out on the screen. We do that by running the command ```echo```, which prints things to the screen.
-
-Run below commands:
 ```
 echo $reminder
 ```
@@ -47,8 +45,6 @@ Now, why did we spend time on learning this? Because variables is a common way t
 Now that you understand the concept of variables, we're going to have a look at the variable which controlls how your prompt looks like.
 
 💥 Using the same command (```echo```) we'll now look at the PS1 environment variable.
-
-Run below commands:
 ```
 echo $PS1
 ```
@@ -67,8 +63,6 @@ Expected output:
 </details> 
 
 💥 Change the PS1 environment variable to include some additional information like time and where you are. By using the export command, we can expose the change to the current shell session we are in.
-
-Run below commands:
 ```
 export PS1="[\u@\h:\t:\w]\$ "
 ```
@@ -137,8 +131,6 @@ So, environment variables can be set in many different places, how do we then ea
 There is a command for that, luckily.
 
 💥 Use the ```env``` command to display all environment variables in your shell session.
-
-Run below commands:
 ```
 env
 ```
@@ -195,8 +187,6 @@ The most common command used in Linux is ```ls```. It helps you show files.
 Let's try it out to further explore the files which sets environment variables. First we need to find out where we are on the Linux filesystem.
 
 💥 Use ```pwd``` to Print Working Directory, meaning printing out where you are currently.
-
-Run below commands:
 ```
 pwd
 ```
@@ -238,8 +228,6 @@ That was perhaps not what we expected. We got nothing. The reason for this is be
 Introducing ```manual pages``` or ```man pages```. In Linux, most commands comes with a so called manual pages. 
 
 💥 Access the manual pages for the ls command. To exit the manual page, press q.
-
-Run below commands:
 ```
 man ls
 ```
@@ -276,8 +264,6 @@ Now we know how to find hidden files.
 👍 If you want to learn more about a command, viewing the manual page of the command is a good way to start. Remember that as we move forwards in the lab.
 
 💥 Look at all the hidden files in your home directory.
-
-Run below command:
 <details>
 <summary>I could use some help...</summary>
 <p>
@@ -348,8 +334,6 @@ Means that the group which owns this file, also called ec2-user, can read this f
 Means that everyone who does not own this file, can read this file.
 
 💥 Let's look at something else, at our home directory.
-
-Run below commands:
 ```
 ls -la /home
 ```
@@ -379,7 +363,6 @@ To change permissions for files and directories, first you need to have write ac
 
 💥 Create a new file called secrets in your home directory which we can manipulate.
 
-Run below commands:
 ```
 echo "I still do not like broccoli" >secret
 ```
@@ -400,7 +383,6 @@ Above uses the echo command, which prints text to the terminal to create a file.
 
 💥 Let's have a look at the file, by using the ```cat``` command again.
 
-Run below commands:
 ```
 cat secret
 ```
@@ -421,7 +403,6 @@ I still do not like broccoli
 Next, let's explore moving and copying files. Let's start by moving our secret file.
 💥 Rename your file to .secret to hide the file from open view.
 
-Run below commands:
 ```
 mv secret .secret
 ```
@@ -442,7 +423,6 @@ Verify that the file is hidden by running ```ls```.
 
 💥 Now, let's trying copying.
 
-Run below commands:
 ```
 cp .secret .secret.backup
 ```
@@ -472,14 +452,12 @@ Above, we assign read and write access to both the user and the group which owns
 
 💥 Now, let's remove the read access to our secret file.
 
-Run below commands:
 ```
 chmod ug-r .secret
 ```
 
 💥 Try to see the content of the file, using ```cat```.
 
-Run below commands:
 ```
 cat .secret
 ```
@@ -587,7 +565,6 @@ To conclude, to be able to set permissions on a need-to-know basis, we need to k
 
 💥 Let's have a look at an example of a critical, but world readable file.
 
-Run below commands:
 ```
 ls /etc/selinux/config
 ```
@@ -609,7 +586,6 @@ This file, which controls if SELinux (an important security feature we'll cover 
 
 💥 Let's imagine we are a bad actor and try to overwrite this file with nothing.
 
-Run below commands:
 ```
 echo "" >/etc/selinux/config
 ```
