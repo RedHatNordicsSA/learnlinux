@@ -6,6 +6,35 @@ The topic of security is vast and is not something easily understood by people w
 
 ### Keeping your system updated
 The most difficult challenge is not how to apply security hardening on systems, it's how to keep your systems updated.
+To update our system in Red Hat Enterprise Linux, we simply run the below command:
+```
+sudo dnf update -y
+```
+
+Keeping your system updated though, is mainly about three things.
+* Testing
+* Planning
+* Automation
+
+#### Testing
+In a perfect world, no software vendor would have bugs, in reality, all software is in different broken states, because software is written by humans.
+So we need to have test environments, where we with less impact on the business can test out updates. A good way to start and approach testing is to start and focus on key features. How do you in one simple test prove that most of the functionality in your system works? Perhaps by connecting to the system via SSH and then running ```ls```. That proves that large parts of the functionality we depend on, such as networking, storage and the operating system, is indeed working. If you do not test, then you are rolling a dice and that will make it difficult to create suffient trust in the organisation to be allowed to update systems on a regular basis (I don't mean once per year now...).
+
+👍 The best way to reduce the need of testing, is by running solutions which has forward compatibility. Red Hat Enterprise Linux is the only Linux operating system which provides solid forward compatibility. Simplified, this is done by backporting bug fixes, security updates and new features into software versions that was selected for a new major release of the operating system. This significantly reduces the need to do testing. We have customers who in diverse environments with thousands of different applications patches systems hundreds of thousands of times, without business critical business outage. That is valuable and would very difficult without forward compatibility.
+
+⭐ Read more about the Red Hat Enterprise Linux ABI (forward compatibility) here: https://access.redhat.com/articles/rhel8-abi-compatibility
+
+#### Planning
+In a perfect world, it's always possible to take systems offline to patch them, in reality, it's very common that requirements on availability and application architecture is a complete mismatch. When we talk about availability, there are two terms, which often are misused. High availability, which means that there is some degree of redundancy and full diversity, which means that every single function runs in multiple places and there is no single point of failure. Full diversity is very uncommon to see outside of Telco and some Government organizations. The reason for that is that everything needs to be replicated, applications, load balancers, security functions, servers, server rooms, data centers in different cities, different internet providers which provides connections via different black fiber, and so on.
+
+👍 As reality commonly is that we only have some degree of reundancy, we need to plan for when we have to take things down. A common solution is distributed application architecture, such as microservices. If you have five instances of a web front end and you can take down one, upgrade it and then join it back to the group of live systems, we can decrease the impact updating has on our system.
+
+👍 Another best practice is to talk to and collaborate with the people who affects your life cycle. If you depend on X to run your things, ensure you know what the future life cycle of X looks like.
+
+#### Automation
+In a perfect world, all applications are delivered with enough automation that they manages themselfs, in reality, few does. It's common that a piece of software comes with a manual, instead of a script and automatics. This means that doign things like testing and updating systems and software requires humans to follow guides and enter information into terminals, which does not scale. In turn, this means that we cannot update as often, as humans with skills and experience are limited resources in most companies.
+
+👍 In order to 
 
 
 ### Limiting the attack vector
