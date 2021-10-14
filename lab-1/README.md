@@ -276,69 +276,177 @@ top
 ### Hardware
 To view the hardware the operating system runs on, there are a lot of different tools. These tools fetches information from the /proc filesystem, which means that you can also go there to get the unformated information.
 
+💥 Explore the lscpu command
+```
+man lscpu
+```
+
+
 💥 Have a look at the systems CPU
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 lscpu
 ```
+</p>
+</details> 
+
+💥 Explore the lsmem command
+```
+man lsmem
+```
 
 💥 Have a look at the systems memory
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 lsmem
 ```
+</p>
+</details> 
+
+💥 Explore the parted command
+```
+man parted
+```
 
 💥 Exmine attached disks
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 sudo parted -l
 ```
+</p>
+</details> 
+
+💥 Explore the nmcli command
+```
+man nmcli
+```
 
 💥 Check out your network devices
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 nmcli device show
 ```
+</p>
+</details> 
+
+💥 Explore the dmidecode command
+```
+man dmidecode
+```
 
 💥 Have a look at various hardware devices described in the systems SMBIOS/DMI
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 sudo dmidecode
 ```
+</p>
+</details> 
+
+💥 Explore the dmesg command
+```
+man dmesg
+```
 
 💥 Examine messages from the kernels ring buffer, where you find a lot of initialization information about hardware
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 dmesg
 ```
+</p>
+</details> 
 
 ### Logs
 Most program generates logs. In Red Hat Enterprise Linux, systemd is responsible to store them.
 We can access the logs by using the ```journalctl``` command.
 
+💥 Explore the journalctl command
+```
+man journalctl
+```
+
 💥 Review the full system logs. Quit by pressing ```q```
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl
 ```
+</p>
+</details> 
 
 💥 Review logs for the boot process
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -b
 ```
+</p>
+</details> 
 
 💥 Review logs for a specific service
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -u tuned
 ```
+</p>
+</details> 
 
-💥 Follow the log stream live
+💥 Follow the live log stream
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -f
 ```
+</p>
+</details> 
 
 💥 Fetch logs since a specific time range
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl --since "1 hour ago"
 ```
+</p>
+</details> 
 
 💥 Fetch all logs for your user, using the $UID environment variable which containers the user id of our user.
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl _UID=$UID
 ```
+</p>
+</details> 
 
 Logs can also be found stored in files in /var/log.
 
@@ -347,10 +455,16 @@ Logs can also be found stored in files in /var/log.
 ls /var/log
 ```
 
-💥 Search general log file for error messages
+💥 Search general log file /var/log/messages for the message "error"
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 sudo grep -i error /var/log/messages
 ```
+</p>
+</details> 
 
 ### Common services
 As you found when exploring services and processes, there are a lot of moving parts in Linux. Here's some of the more important ones.
@@ -358,70 +472,154 @@ As you found when exploring services and processes, there are a lot of moving pa
 #### sshd
 The secure shell daemon is the default way you connect to Linux. It provides you with the terminal connection to your shell over an encryped channel.
 
-💥 Review the status of the sshd daemon
+💥 Explore sshd and systemctl
+```
+man sshd
+man systemctl
+```
+
+💥 Review the status of the sshd daemon using systemctl
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 systemctl status sshd
 ```
+</p>
+</details> 
 
-💥 Review logs for the sshd daemon
+💥 Review logs for the sshd daemo.
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -u sshd
 ```
+</p>
+</details> 
 
-The configuration for the daemon and the ssh client is located in /etc/ssh.
-Configuration for the service: /etc/ssh/sshd_config
-Configuration for the client: /etc/ssh/ssh_config
+* The configuration for the daemon and the ssh client is located in /etc/ssh.
+* Configuration for the service: /etc/ssh/sshd_config
+* Configuration for the client: /etc/ssh/ssh_config
 
 ### chronyd
 Chronyd is a service which syncronizes the clock on your system. Without time synchronization on your system you cannot tell when something happened, more importantly a lot of service depends on time to be synchronized across your systems.
 
+💥 Explore chronyd and chronyc
+```
+man chronyd
+man chronyc
+```
+
 💥 Review the status of chronyd daemon
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 systemctl status chronyd
 ```
+</p>
+</details> 
 
 💥 Review logs for chronyd daemon
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -u chronyd
 ```
+</p>
+</details> 
 
 💥 Check time synchronization on the system
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 chronyc tracking
 ```
+</p>
+</details> 
+
 
 #### NetworkManager
 The program which controls the systems network configuration is called Network Manager. 
 
+💥 Explore NetworkManager and nmcli
+```
+man NetworkManager
+man nmcli
+```
+
 💥 Review the status of NetworkManager
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 systemctl status NetworkManager
 ```
+</p>
+</details> 
 
 💥 Review logs for NetworkManager
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -u NetworkManager
 ```
+</p>
+</details> 
 
 💥 Review network configuration
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 nmcli
 nmcli device show
 ```
+</p>
+</details> 
 
 #### sssd
 SSSD provides a set of daemons to manage access to remote directories and authentication mechanisms.
 Use ```sssd``` to integrate to any central identity and authentication system, such as Active Directory, ldap or radius, etc.
 
+💥 Explore sssd
+```
+man sssd
+```
+
 💥 Review the status of sssd
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 systemctl status sssd
 ```
+</p>
+</details> 
 
 💥 Review logs for sssd
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 journalctl -u sssd
 ```
+</p>
+</details> 
 
 Configuration is stored in /etc/sssd.
 
