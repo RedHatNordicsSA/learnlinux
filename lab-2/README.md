@@ -413,3 +413,5 @@ AIDE or Advanced Intrusion Detection Environment is a tool which can help you de
 Congratulations, you've are now better equipped to understand security in Linux. 😃
 
 Next chapter is about troubleshooting.
+[Go to the next lab, lab 3](../lab-3/README.md) 
+
