@@ -207,10 +207,120 @@ getenforce
 sudo systemctl disable httpd --now
 ```
 
+💥 Enable the web console
+```
+sudo systemctl start cockpit.socket
+```
+
+💥 Go to https://yoursystem and access the web console, once there, go to the SELinux tab and further review things SELinux prevented access to.
+
 Now that you know why to never run Linux without SELinux enabled, you are good to go to the next section.
 
 ### Firewalling
-Firwalld
+Good security is built like an onion, in layers. Just because you have firewalls in your network, doesn't mean that you shouldn't do filtering on the host level as well. Red Hat Enterprise Linux comes with very capable network filtering features. It also provides a daemon which helps manage your local firewall rules, called firewalld. Let's explore it.
+
+💥 First, install firewalld.
+```
+sudo dnf install firewalld
+```
+
+💥 Enable and start running it
+```
+sudo systemctl enable firewalld --now
+```
+
+💥 Next step is to verify that it's running. We'll use firewalld's cli to do this.
+```
+sudo firewall-cmd --state
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --state
+running
+[ec2-user@ip-172-31-31-136 ~]$
+```
+
+💥 Try to access the web console of your system and see what happens.
+
+Expected output:
+```
+This site can’t be reached
+https://ec2-18-195-46-93.eu-central-1.compute.amazonaws.com/ is unreachable.
+ERR_ADDRESS_UNREACHABLE
+``` 
+
+The reason why we haven't been kicked out of the system is because already established connections and the ```sshd``` service is allowed by default.
+
+💥 Review the current rules of the system.
+```
+sudo firewall-cmd --list-all 
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0
+  sources: 
+  services: cockpit dhcpv6-client ssh
+  ports: 
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+Let's add https. Here's we use the services concept which firewalld has, where we can enable a service and no have to think about what ports and protocols are in use.
+
+💥 List available service in firewalld
+```
+firewall-cmd --get-services
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ firewall-cmd --get-services
+RH-Satellite-6 amanda-client amanda-k5-client amqp amqps apcupsd audit bacula bacula-client bb bgp bitcoin bitcoin-rpc bitcoin-testnet bitcoin-testnet-rpc bittorrent-lsd ceph ceph-mon cfengine cockpit collectd condor-collector ctdb dhcp dhcpv6 dhcpv6-client distcc dns dns-over-tls docker-registry docker-swarm dropbox-lansync elasticsearch etcd-client etcd-server finger freeipa-4 freeipa-ldap freeipa-ldaps freeipa-replication freeipa-trust ftp galera ganglia-client ganglia-master git grafana gre high-availability http https imap imaps ipp ipp-client ipsec irc ircs iscsi-target isns jenkins kadmin kdeconnect kerberos kibana klogin kpasswd kprop kshell kube-apiserver ldap ldaps libvirt libvirt-tls lightning-network llmnr managesieve matrix mdns memcache minidlna mongodb mosh mountd mqtt mqtt-tls ms-wbt mssql murmur mysql nfs nfs3 nmea-0183 nrpe ntp nut openvpn ovirt-imageio ovirt-storageconsole ovirt-vmconsole plex pmcd pmproxy pmwebapi pmwebapis pop3 pop3s postgresql privoxy prometheus proxy-dhcp ptp pulseaudio puppetmaster quassel radius rdp redis redis-sentinel rpc-bind rquotad rsh rsyncd rtsp salt-master samba samba-client samba-dc sane sip sips slp smtp smtp-submission smtps snmp snmptrap spideroak-lansync spotify-sync squid ssdp ssh steam-streaming svdrp svn syncthing syncthing-gui synergy syslog syslog-tls telnet tentacle tftp tftp-client tile38 tinc tor-socks transmission-client upnp-client vdsm vnc-server wbem-http wbem-https wsman wsmans xdmcp xmpp-bosh xmpp-client xmpp-local xmpp-server zabbix-agent zabbix-server
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+Here we can see https listed, good.
+
+💥 Add an opening in the firewall for https
+```
+sudo firewall-cmd --zone=public --add-service=https
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --zone=public --add-service=https
+success
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
+
+💥 Now refresh the web console web page and verify that you again have access.
+
+Once we have verified we have access, we can now add the firewall rule as a permanent rule which does not go away after reboot.
+```
+sudo firewall-cmd --zone=public --add-service=https --permanent
+```
+
+Expected output:
+```
+[ec2-user@ip-172-31-31-136 ~]$ sudo firewall-cmd --zone=public --add-service=https --permanent
+success
+[ec2-user@ip-172-31-31-136 ~]$ 
+```
 
 ### Audit
+You have already learned a bit about auditing log files. In this section we'll introduce two more tools which allows you to audit what's happening in the system.
+Using no additional audit tools, we are often in the hands on what an application or the operating system deems suitable to log. In more security sensitive environments, we often want to log more. After a system has been attacked, it's critical that we learn what functions and data was compromised, for this, there are two tools, ```auditd``` and ```AIDE```.
+
+
 Auditd/AIDE
