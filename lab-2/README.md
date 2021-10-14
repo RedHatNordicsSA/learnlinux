@@ -248,7 +248,10 @@ sudo systemctl disable httpd --now
 sudo systemctl start cockpit.socket
 ```
 
-💥 Go to https://yoursystem and access the web console, once there, go to the SELinux tab and further review things SELinux prevented access to.
+💥 Either run below command or go to https://yoursystem and access the web console, once there, go to the SELinux tab and further review things SELinux prevented access to.
+```
+sudo ausearch -m AVC -i 
+```
 
 Now that you know why to never run Linux without SELinux enabled, you are good to go to the next section.
 
