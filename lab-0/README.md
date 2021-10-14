@@ -567,7 +567,9 @@ man rm
 <details>
 <summary>I could use some help...</summary>
 <p>
-```rm file-* -f
+       
+```
+rm file-* -f
 ```
 </p>
 </details> 
