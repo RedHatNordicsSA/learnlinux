@@ -1161,25 +1161,56 @@ For the next lab, we will need some additional software to be in place. Software
 RPMs are put in repositories where they are fetched to systems over HTTP, HTTPS or FTP. What repositories you enable on a system is configured in /etc/yum.repos.d where configuration files are dropped. When you then run the ```dnf``` command to install software, the system knows where to get the software.
 
 To view information about installed software, we can also use the ```rpm``` command.
-💥 List all install RPMs on the system and sort the output into alfabetic order
+
+💥 Explore the rpm command
+```
+man rpm
+```
+
+💥 List all install RPMs on the system and sort the output into alfabetic order by piping output to ```sort```
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 rpm -qa|sort
 ```
+</p>
+</details> 
 
 💥 View more information about a specific RPM
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 rpm -qi zlib
 ```
+</p>
+</details>
 
 💥 View the changelog of an RPM
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
 ```
 rpm -q zlib --changelog
 ```
+</p>
+</details>
 
 💥 View what files an RPM deliver to the system
+<details>
+<summary>I could use some help...</summary>
+<p>
+  
  ```
  rpm -ql zlib
  ```
+</p>
+</details>
+
 
 💥 Let's have a look at which repositories are configured on our system. Run ```ls``` to list any files inside of the /etc/yum.repos.d directory.
 ```
