@@ -120,10 +120,13 @@ mv phpshell-2.6 /var/www/cgi-bin/
 ```
 
 💥 Access the application via http://yoursystem/cgi-bin/phpshell-2.6/phpshell.php
+```
 Login using user: testuser
 Password: redhat123
+```
 
-We are now going to pretend that we are an attacker exploring the system
+We are now going to pretend that we are an attacker who gained shell access via our web application and who is now starting to explore the system.
+
 💥 List all processes in the system
 ```
 ps -ef
@@ -181,7 +184,7 @@ $ dmesg
 dmesg: read kernel buffer failed: Permission denied
 ```
 
-💥 Now we are going to disable SELinux on the system. **Never** do this on an actual system.
+💥 Now we are going to disable SELinux on the system. **Never** do this on an actual system. If anyone questions this, it likely means that they do not understand what they are talking about.
 ```
 sudo setenforce 0
 ```
@@ -192,6 +195,12 @@ Expected result:
 * You see all processes
 * You can list all RPMs
 * You can access the kernel's ring buffer
+
+💥 Enable SELinux again and verify that it's set to ```Enforcing```
+```
+sudo setenforce 1
+getenforce
+```
 
 Now that you know why to never run Linux without SELinux enabled, you are good to go to the next section.
 
