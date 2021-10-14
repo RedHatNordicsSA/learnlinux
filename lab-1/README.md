@@ -645,7 +645,40 @@ journalctl -u sssd
 
 Configuration is stored in /etc/sssd.
 
-Now you know enough to get started with the more advanced topics, which is security. 😃
+#### Web console
+The web console, sometimes called cockpit, after it's open source project, is a lightweight web interface for your Red Hat Enterprise Linux server.
+For beginners to Linux, it's highly recommended. For veteran Linux users, it's highly recommended. You get it, it's good stuff.
+
+💥 Install Web console
+```
+sudo dnf install cockpit
+```
+
+💥 Configure Web console to use port 443 instead of the default port 9090. You'll understand a bit better what we are doing after the chapter on security. For now, just understand that we are managing a new set of permissions, enforced by the security feature SELinux. If you want, just cut and paste all the commands into the prompt.
+```
+sudo mkdir /etc/systemd/system/cockpit.socket.d
+sudo su -
+sudo cat << 'EOF' >/etc/systemd/system/cockpit.socket.d/listen.conf
+[Socket]
+ListenStream=
+ListenStream=443
+EOF
+exit
+sudo restorecon -R /etc/systemd/system/cockpit.socket.d
+sudo sudo semanage port -m -t websm_port_t -p tcp 443
+```
+
+💥 Enable the web console service
+```
+sudo systemctl daemon-reload
+sudo systemctl restart cockpit.socket
+```
+
+💥 Voila, go ahead and access the web console using your browser, at https://yoursystem
+Take some time to explore the different menus and see what information is available.
+
+
+We're done with this section. Now you know enough to get started with the more advanced topics, which is security. 😃
 
 [Go to the next lab, lab 2](../lab-2/README.md) 
 
