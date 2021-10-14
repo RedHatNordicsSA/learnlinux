@@ -1,5 +1,8 @@
 # Welcome to the lab
-Welcome to a hands on lab teaching some of the important basics of Red Hat Enterprise Linux.
+Welcome to a hands on introduction to some of the important basics of Red Hat Enterprise Linux. 
+
+This guide does not assume that you know Linux. Neither is it a complete introductions to everything. It will hopefully work as a foundation for you, as you go on to learn more 😃
+
 This includes:
 ```
 * Command line fundamentals
@@ -9,11 +12,15 @@ This includes:
 ** Hardware
 ** Logs
 ** Common services
-* Troubleshooting
 * Security features
+* Troubleshooting and performance tuning
 ```
 
 # Before you get started
+
+## It's not a competition
+If you run through this lab copying and pasting commands blindly into a prompt, you will learn very little.
+Try to understand what you are doing, when possible. A lot of effort has gone into the text between you doing things, take time to read what it says and you will end up learning much more.
 
 ## Lab graphics
 
