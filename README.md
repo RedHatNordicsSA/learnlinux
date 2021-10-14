@@ -24,6 +24,9 @@ Try to understand what you are doing, when possible. A lot of effort has gone in
 
 👍 When you can, try to figure out what command to run, before you go on to show what command to run. Also, first look at your own output from the command before you compare it with the expected output.
 
+## Contribute improvements and fixes!
+If you run through this lab and find errors or things which can be improved. Create a pull request! Thanks 😃
+
 ## Lab graphics
 
 In this lab, we use some basic graphics to make the lab easier to understand. Such as:
