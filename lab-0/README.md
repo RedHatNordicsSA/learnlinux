@@ -1136,7 +1136,7 @@ Expected output:
 
 This is what we should have expected, it's because by creating a file, the execution permission is not added automatically.
 
-💥 Add executive rights on the file and rerun the command.
+💥 Add executive rights to our user for the file and rerun the command.
 ```
 chmod u+x testscript
 ./testscript
