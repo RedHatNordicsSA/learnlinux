@@ -474,7 +474,7 @@ Expected output:
 
 ⭐ If you want to dive further into how umask works, have a look here: https://man7.org/linux/man-pages/man2/umask.2.html
 
-❗ Setting correct permissions on files is a security fundamental in Linux, having very permissive access rights on files can be a serious security issue. But before you run off to remove read, write and execute permissions for anyone who is not an owner of a file on your Linux system, wait. If you do that, you may break your system. Why is that? Because a lot of programs rely on being able to read files they don't own. For example, to be able to understand if a system has a specific setting or not which the program needs to adopt.
+❗ Setting correct permissions on files is a security fundamental in Linux, having very permissive access rights on files can be a serious security issue. But before you run off to remove read, write and execute permissions for anyone who is not an owner of a file on your Linux system, wait. If you do that, you may break your system. Why is that? Because a lot of programs rely on being able to read and execute files and directories they don't own. For example, to be able to understand if a system has a specific setting or not which the program needs to adopt.
 
 To conclude, to be able to set permissions on a need-to-know basis, we need to know a lot about both the system and the programs running on it.
 
