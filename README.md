@@ -1,5 +1,5 @@
 # Welcome to the lab
-Welcome to a hands on introduction to some of the important basics of Red Hat Enterprise Linux. 
+Welcome to a hands on introduction of Red Hat Enterprise Linux. 
 
 This guide does not assume that you know Linux. Neither is it a complete introductions to everything. It will hopefully work as a foundation for you, as you go on to learn more 😃
 
