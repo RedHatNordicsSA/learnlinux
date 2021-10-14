@@ -33,6 +33,7 @@ Here is an example of expected output when running commands
 ## :exclamation: If something goes wrong
 If by some reason you get stuck in a lab - then here's what you should do. **Follow below steps 1-5**. _Do not skip any steps if not told to._
 
+0. Linux is case sensitive, that means that ```Cat```, ```cat``` and ```CAT``` are three completely different things. As a guiding rule, only use small letters.
 1. If you do not understand what to do in a lab, or do not understand what you are doing, skip immediately to step 5. Also, the authors of this lab apologize for that. The purpose of this lab is so that everyone can do it and understand it.
 2. Chances are that you have simply not followed the lab instructions. Start by reading the lab instructions again, carefully.
 3. If you are sure that you are doing things as described in the labs, perhaps you typed something wrong or had a copy-paste accident. Double checking your files content and comparing them with the content described here in the lab. If you typed things manually, try doing a clean copy-paste from the lab page instead.
