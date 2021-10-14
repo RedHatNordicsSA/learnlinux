@@ -202,6 +202,11 @@ sudo setenforce 1
 getenforce
 ```
 
+💥 Disable the web server
+```
+sudo systemctl disable httpd --now
+```
+
 Now that you know why to never run Linux without SELinux enabled, you are good to go to the next section.
 
 ### Firewalling
