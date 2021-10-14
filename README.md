@@ -27,12 +27,17 @@ Try to understand what you are doing, when possible. A lot of effort has gone in
 In this lab, we use some basic graphics to make the lab easier to understand. Such as:
 
 :boom: This is something which you have to do.
+
 :star: If you have time, you can also do this.
+
 :exclamation: Take careful notice of this, or you may fall on your face.
+
 :thumbsup: This text contains information about a best practice.
+
 ```
 Here is some code that you need to run
 ```
+
 ```
 Here is an example of expected output when running commands
 ```
