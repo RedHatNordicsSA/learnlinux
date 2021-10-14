@@ -10,13 +10,15 @@ Before we can start with that, it helps to know where different files normally l
 man tree
 ```
 
-💥 Use the ```tree``` command which we installed in lab-0 to explore the filesystem.
+💥 Use the ```tree``` command which we installed in lab-0 to explore the first couple of directories of the filesystem.
 <details>
 <summary>I could use some help...</summary>
 <p>
   
 ```
 tree / -L 1
+tree / -L 2
+tree / -L 3
 ```
 </p>
 </details> 
