@@ -311,7 +311,7 @@ nmcli device show
 
 #### sssd
 SSSD provides a set of daemons to manage access to remote directories and authentication mechanisms.
-With the help of SSSD you can integrate your Linux system to Active Directory for example.
+Use ```sssd``` to integrate to any central identity and authentication system, such as Active Directory, ldap or radius, etc.
 
 💥 Review the status of sssd
 ```
