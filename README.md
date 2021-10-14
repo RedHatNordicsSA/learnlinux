@@ -20,7 +20,9 @@ This includes:
 
 ## It's not a competition
 If you run through this lab copying and pasting commands blindly into a prompt, you will learn very little.
-Try to understand what you are doing, when possible. A lot of effort has gone into the text between you doing things, take time to read what it says and you will end up learning much more.
+Try to understand what you are doing, when possible. A lot of effort has gone into the text, take time to read what it says and you will end up learning much more.
+
+👍 When you can, try to figure out what command to run, before you go on to show what command to run. Also, first look at your own output from the command before you compare it with the expected output.
 
 ## Lab graphics
 
