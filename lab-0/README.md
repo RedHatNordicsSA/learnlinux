@@ -178,7 +178,6 @@ HOSTNAME=ip-172-31-31-136.eu-central-1.compute.internal
 HOME=/home/ec2-user
 SHELL=/bin/bash
 PATH=/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
-[ec2-user@ip-172-31-31-136:22:14:20:~]$
 ```
 So, what do we got here?
 ```
