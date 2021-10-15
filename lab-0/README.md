@@ -132,6 +132,8 @@ or
 ~/.bashrc
 ```
 
+👍 ~/.bashrc is shorthand for the current users home directory, in your case /home/ec2-user/.bashrc
+
 So, environment variables can be set in many different places, how do we then easily tell what is set to what?
 There is a command for that, luckily.
 
