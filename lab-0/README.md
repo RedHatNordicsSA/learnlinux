@@ -674,6 +674,14 @@ rm: remove write-protected regular empty file 'file-700'? ^C
 </p>
 </details>
 
+<details>
+<summary>A tip for how to fix things</summary>
+<p>
+
+Use ```ctrl+c``` to break out of the remove loop.
+</p>
+</details>
+
 When a file does not have write permissions, ```rm``` will ask the user if it should really be removed. Here we have two options, to set write permissions for the files or to just ask ```rm``` to remove the files anyways.
 
 💥 Use the manpage for ```rm``` to figure out how to remove all the files without having to enter in y, one hundred times.
