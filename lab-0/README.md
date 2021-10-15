@@ -561,7 +561,7 @@ Expected output:
 </p>
 </details>
 
-0002, means the default permissions for creating a file will be ```rw-r--r--``` and ```drwxr-xr-x``` for directories.
+0002, means the default permissions for creating a file will be ```rw-r--r--``` and ```drwxrwxr-x.``` for directories.
 
 ⭐ If you want to dive further into how umask works, have a look here: https://man7.org/linux/man-pages/man2/umask.2.html
 
