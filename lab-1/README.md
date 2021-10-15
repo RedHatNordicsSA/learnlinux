@@ -665,7 +665,7 @@ ListenStream=443
 EOF
 exit
 sudo restorecon -R /etc/systemd/system/cockpit.socket.d
-sudo sudo semanage port -m -t websm_port_t -p tcp 443
+sudo semanage port -m -t websm_port_t -p tcp 443
 ```
 
 💥 Enable the web console service
