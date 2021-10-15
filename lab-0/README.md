@@ -425,7 +425,7 @@ Expected output:
 </p>
 </details> 
 
-Verify that the file is hidden by running ```ls```.
+💥 Verify that the file is hidden by running ```ls```.
 
 💥 Now, let's trying copying.
 
