@@ -13,7 +13,7 @@ With no further wait, here are two legendary guides written mainly by Red Hat's 
 # Even more bonus tasks
 Are you done? Have a look at Red Hat's free online labs for Red Hat Enterprise Linux! It includes an additional 28 labs for you with days of experience :)
 
-Go here: https://lab.redhat.com and run the labs you think looks fun. Among many other things, it includes a sandbox version of Red Hat Enterprise Linux 8, which you can access here: https://lab.redhat.com/sandbox
+Go here: https://lab.redhat.com and run the labs you think looks fun. Among many other things, it includes a playground with Red Hat Enterprise Linux 8, which you can access here: https://lab.redhat.com/sandbox
 
 ![labs.redhat.com](labsredhatcom.png?raw=true "Title")
 
