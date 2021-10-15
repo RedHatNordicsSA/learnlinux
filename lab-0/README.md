@@ -34,11 +34,17 @@ echo $reminder
 ```
 
 Expected output:
+<details>
+<summary>Show</summary>
+<p>
+  
 ```
 [ec2-user@ip-172-31-31-136 ~]$ echo $reminder
 I should go for a hours walk every day
 [ec2-user@ip-172-31-31-136 ~]$ 
 ```
+</p>
+</details> 
 
 Now, why did we spend time on learning this? Because variables is a common way to configure applications and set behavior in Linux.
 
