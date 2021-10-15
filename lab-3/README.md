@@ -11,7 +11,7 @@ With no further wait, here are two legendary guides written mainly by Red Hat's 
 💥 Try out and try to understand the examples explained in Marko Myllynen's Red Hat Enterprise Linux Performance Tuning guide: https://myllynen.github.io/rhel-performance-guide/
 
 # Even more bonus tasks
-Are you done? Have a look at Red Hat's free online labs for Red Hat Enterprise Linux!
+Are you done? Have a look at Red Hat's free online labs for Red Hat Enterprise Linux! It includes an additional 28 labs for you with days of experience :)
 
 Go here: https://lab.redhat.com and run the labs you think looks fun.
 
