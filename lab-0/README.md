@@ -25,7 +25,7 @@ linuxrules="a variable can also store text strings"
 
 💥 Let's test and set a variable in our shell and then use it. We are going to set a variable and then fetch the content of it. Run below command to set your variable.
 ```
-[ec2-user@ip-172-31-31-136 ~]$ reminder="I should go for a hours walk every day"
+reminder="I should go for a hours walk every day"
 ```
 
 💥 Next, we are going to fetch the value of the variable and print it out on the screen. We do that by running the command ```echo```, which prints things to the screen.
