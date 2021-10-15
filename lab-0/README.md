@@ -1000,7 +1000,7 @@ test:x:1001:1001::/home/test:/bin/bash
 
 💥 Print the first user which can access a shell and replace the text root with some text.
 ```
-grep bash /etc/passwd||head -1|cut -d: -f1|sed 's/root/the administrator account is configured with a shell/g' 
+grep bash /etc/passwd|head -1|cut -d: -f1|sed 's/root/the administrator account is configured with a shell/g' 
 ```
 
 Expected output:
