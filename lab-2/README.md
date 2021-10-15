@@ -135,7 +135,7 @@ sudo systemctl stop cockpit.socket
 
 💥 Install Apache web server
 ```
-sudo dnf install httpd
+sudo dnf install httpd php
 ```
 
 💥 Enable the web server
