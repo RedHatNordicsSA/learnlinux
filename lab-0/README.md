@@ -99,11 +99,10 @@ Environment variables are variables which are set in a user's shell session. In 
 
 To have a look at these files, we can use the ```cat```or concatenate command, which prints the contents of files.
 
-💥 Run below command to display the content of the file ```/etc/bashrc``` and /home/user/.bashrc. 
+💥 Run below command to display the content of the file ```/etc/bashrc```
 ```
 cat /etc/bashrc
 ```
-👍 Please note that instead of writing /home/user/.bashrc we are typing ~/.bashrc instead. ```~``` is shorthand for home directory and allows us to not hardcode the name of the user in this example.
 
 Expected output:
 <details>
