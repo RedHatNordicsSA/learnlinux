@@ -3,7 +3,7 @@ Next, we are going to explore the different parts of the operating system, using
 
 ### Exploring filesystems and directories
 If it helps, everything in Linux is files. Disk devices, network devices, directories, links, it's all files. So to explore the operating system is to explore a bunch of files.
-Before we can start with that, it helps to know where different files normally lives.
+Before we can start with that, it helps to know where different types of files normally lives.
 
 💥 Explore the ```tree``` command.
 ```
