@@ -161,7 +161,7 @@ sudo mv phpshell-2.6 /var/www/cgi-bin/
 
 💥 Adjust the SELinux context for what we copied in
 ```
-restorecon -Rv /var/www/html/cgi-bin
+restorecon -Rv /var/www/cgi-bin
 ```
 
 💥 Access the application via http://yoursystem/cgi-bin/phpshell-2.6/phpshell.php
