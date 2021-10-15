@@ -156,7 +156,7 @@ tar xvf phpshell.tar.gz
 
 💥 Move the directory to the web servers cgi directory
 ```
-mv phpshell-2.6 /var/www/cgi-bin/
+sudo mv phpshell-2.6 /var/www/cgi-bin/
 ```
 
 💥 Access the application via http://yoursystem/cgi-bin/phpshell-2.6/phpshell.php
