@@ -457,7 +457,7 @@ To learn about how to setup and use the main auditing tool in Linux, we're again
 13.1. Linux Audit
 13.2. Audit system architecture
 13.3. Configuring auditd for a secure environment
-13.3. Configuring auditd for a secure environment
+13.4. Starting and controlling auditd
 13.5. Understanding Audit log files
 13.6. Using auditctl for defining and executing Audit rules
 13.7. Defining persistent Audit rules
