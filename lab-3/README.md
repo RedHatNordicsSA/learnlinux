@@ -14,6 +14,9 @@ With no further wait, here are two legendary guides written mainly by Red Hat's 
 Are you done? Have a look at Red Hat's free online labs for Red Hat Enterprise Linux!
 
 Go here: https://lab.redhat.com and run the labs you think looks fun.
+
+![labs.redhat.com](labsredhatcom.png?raw=true "Title")
+
 At the time of writing, here's the different labs available:
 
 * Configuring Terminal Session Recording
