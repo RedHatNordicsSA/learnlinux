@@ -1,5 +1,6 @@
 # Welcome to the lab
-Welcome to a hands on introduction of Red Hat Enterprise Linux.
+Welcome to a hands on introduction of Linux. The lab is made for Red Hat Enterprise Linux 8, so if you run this on something else not all learnings applies.
+
 * For someone without any or little previous Linux experience, it takes approximately 6 hours to complete.
 * If you have some previous Linux experience, it takes approximately 4 hours to complete.
 
