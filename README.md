@@ -1,5 +1,5 @@
 # Welcome to the lab
-Welcome to a hands on introduction of Linux. The lab is made for Red Hat Enterprise Linux 8, so if you run this on something else not all learnings applies.
+Welcome to a hands on introduction of Linux. The lab is made for Red Hat Enterprise Linux 8, so if you run this on something else not all learnings applies. Don't worry, you can download Red Hat Enterprise Linux 8 free, see below.
 
 * For someone without any or little previous Linux experience, it takes approximately 6 hours to complete.
 * If you have some previous Linux experience, it takes approximately 4 hours to complete.
@@ -20,6 +20,12 @@ This includes:
 ```
 
 # Before you get started
+
+## Get free Red Hat Enterprise Linux 8
+If you have not been provided a Red Hat Enterprise Linux 8 instance by people guiding you through this workshop, you can download Red Hat Enterprise Linux 8 for free. Follow below two steps to do that.
+
+1. Register a free user on https://developers.redhat.com
+2. Go to https://developers.redhat.com/products/rhel/download, download an ISO file and install RHEL on a VM of yours.
 
 ## It's not a competition
 If you run through this lab copying and pasting commands blindly into a prompt, you will learn very little.
