@@ -88,7 +88,7 @@ Expected output:
 ❗ Please note that the change to the PS1 variable which we did above is not permanent, the next time we connect, the change will not be there.
 
 ### Environment variables, looking at content of files and manual pages
-Environment variables are variables which are set in a user's shell session. In the BASH shell, which you are using, they are normally set in one out of three files.
+Environment variables are variables which are set in a user's shell session. In the BASH shell, which you are using, they are normally set in one out of four files.
 
 ```
 /etc/bashrc
