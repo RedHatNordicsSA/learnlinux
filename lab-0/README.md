@@ -120,6 +120,7 @@ Expected output:
 # are doing. It's much better to create a custom.sh shell script in
 # /etc/profile.d/ to make custom changes to your environment, as this
 # will prevent the need for merging in future updates.
+  * and some other text that does not fit here *
 ```
 </p>
 </details> 
