@@ -21,8 +21,8 @@ This includes:
 
 # Before you get started
 
-## Get free Red Hat Enterprise Linux 8
-If you have not been provided a Red Hat Enterprise Linux 8 instance by people guiding you through this workshop, you can download Red Hat Enterprise Linux 8 for free. Follow below two steps to do that.
+## Get free Red Hat Enterprise Linux 8/9
+If you have not been provided a Red Hat Enterprise Linux 8/9 instance by people guiding you through this workshop, you can download Red Hat Enterprise Linux 8/9 for free. Follow below two steps to do that.
 
 1. Register a free user on https://developers.redhat.com
 2. Go to https://developers.redhat.com/products/rhel/download, download an ISO file and install RHEL on a VM of yours.
